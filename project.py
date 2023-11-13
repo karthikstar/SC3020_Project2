@@ -45,3 +45,17 @@ class Main:
 
         # Obtain chosen database information & awaits user input
         self.load_main_page(db_list)
+
+    # Standard error static method to be called throughout the 3 files
+    @staticmethod
+    def show_error(msg):
+        """
+        Show error dialog
+        """
+        program = QtWidgets.QApplication(sys.argv)
+        errordialog = QtWidgets.QWidget()
+        error_ui = Error(msg)
+        error_ui.setupUi(errordialog)
+
+        errordialog.show()
+        program.exec()
