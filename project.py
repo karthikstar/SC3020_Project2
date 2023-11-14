@@ -10,7 +10,7 @@ class Main:
         self.login_details.host = "localhost"
         self.login_details.port = "5433"
         self.login_details.user = "postgres"
-        self.login_details.password = "Plmjun98415762"
+        self.login_details.password = "postgres"
         self.login_details = self.login()
 
     def login(self):
