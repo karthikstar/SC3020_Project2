@@ -1,5 +1,8 @@
 import sys
 from PyQt6 import QtWidgets
+from explore import get_database_names, LoginDetails, QueryDetails, retrieve_query_data, retrieve_aqp_data, AnnotatorHelper
+from interface import Login, Error, MainUI
+
 
 class Main:
     def __init__(self):
@@ -7,7 +10,7 @@ class Main:
         self.login_details.host = "localhost"
         self.login_details.port = "5433"
         self.login_details.user = "postgres"
-        self.login_details.password = ""
+        self.login_details.password = "Plmjun98415762"
         self.login_details = self.login()
 
     def login(self):
@@ -41,10 +44,35 @@ class Main:
         Main application logic controller
         """
         # Connect to db using login details
-        db_list = get_dbs(self.login_details)
+        db_list = get_database_names(self.login_details)
 
         # Obtain chosen database information & awaits user input
         self.load_main_page(db_list)
+
+    def get_qep_from_query(self, database, query):
+        """
+        Function called when user submits a query input.
+        """
+        query_details = QueryDetails
+        query_details.database = database
+        query_details.query = query
+
+        qep = retrieve_query_data(self.login_details, query_details)
+        if qep is None:
+            return "Query is not valid. Try again.", -1
+        qep_with_details = AnnotatorHelper().procedure_string(qep)
+        return str(qep_with_details), qep[0][0][0]['Plan']['Total Cost']
+
+    def get_aqp(self, perm_list, database, query):
+        """
+        Function called to get generated alternative query plans
+        """
+        querydetails = QueryDetails
+        querydetails.database = database
+        querydetails.query = query
+
+        aqp = retrieve_aqp_data(self.login_details, querydetails, perm_list)
+        return aqp
 
     # Standard error static method to be called throughout the 3 files
     @staticmethod
@@ -59,3 +87,8 @@ class Main:
 
         errordialog.show()
         program.exec()
+
+
+if __name__ == '__main__':
+    main = Main()
+    main.main()
