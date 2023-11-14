@@ -561,17 +561,17 @@ class MainUI(object):
         self.materializationChoice.setText(_translate("MainUi", "Materialization"))
         self.explicitChoice.setText(_translate("MainUi", "Explicit Sort"))
 
-        self.bitmapChoice.setChecked(True)
-        self.indexChoice.setChecked(True)
-        self.indexOnlyChoice.setChecked(True)
-        self.seqChoice.setChecked(True)
-        self.tidChoice.setChecked(True)
-        self.NLChoice.setChecked(True)
-        self.hashChoice.setChecked(True)
-        self.mergeChoice.setChecked(True)
-        self.hashAggChoice.setChecked(True)
-        self.materializationChoice.setChecked(True)
-        self.explicitChoice.setChecked(True)
+        self.bitmapChoice.setChecked(False)
+        self.indexChoice.setChecked(False)
+        self.indexOnlyChoice.setChecked(False)
+        self.seqChoice.setChecked(False)
+        self.tidChoice.setChecked(False)
+        self.NLChoice.setChecked(False)
+        self.hashChoice.setChecked(False)
+        self.mergeChoice.setChecked(False)
+        self.hashAggChoice.setChecked(False)
+        self.materializationChoice.setChecked(False)
+        self.explicitChoice.setChecked(False)
 
         self.dbButton.addItems(self.db_list)
         if "TPC-H" in self.db_list:
@@ -581,7 +581,7 @@ class MainUI(object):
         self.dbButton.currentIndexChanged.connect(self.populate_pane)
         self.schemaWidget.itemDoubleClicked.connect(self.add_to_text)
         self.queryInput.setPlainText(
-            'SELECT * FROM region LEFT JOIN nation on region.r_regionkey = nation.n_regionkey ORDER BY r_name DESC ')
+            'SELECT * FROM region LEFT JOIN nation on region.r_regionkey = nation.n_regionkey WHERE n_regionkey = 1 ORDER BY r_name DESC')
 
         self.executeButton.clicked.connect(self.show_annotations)
 
