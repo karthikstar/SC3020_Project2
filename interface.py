@@ -613,9 +613,9 @@ class MainUI(object):
         return checked
 
     def populate_pane(self) -> QTreeWidgetItem:
-        from preprocessing import get_tables_for_db, get_columns_for_table
+        from explore import get_tables_in_database, get_columns_for_table
         self.schemaWidget.clear()
-        tables = get_tables_for_db(self.login_details, self.dbButton.currentText())
+        tables = get_tables_in_database(self.login_details, self.dbButton.currentText())
         treeWid = {}
         for table in tables:
             treeWid[table] = get_columns_for_table(self.login_details, self.dbButton.currentText(), table)
@@ -632,12 +632,12 @@ class MainUI(object):
 
     def show_annotations(self):
         from project import Main
-        annotation, qep_cost = Main.get_annotated_qep(self, self.dbButton.currentText(),
+        annotation, qep_cost = Main.get_qep_from_query(self, self.dbButton.currentText(),
                                                       self.queryInput.toPlainText())
         self.optPlanWindow.setText(annotation)
 
-        import preprocessing
-        perm_list = preprocessing.permutation(self)
+        import explore
+        perm_list = explore.generate_combinations(self)
 
         if qep_cost != -1:
             self.plot_aqps(perm_list, qep_cost)
