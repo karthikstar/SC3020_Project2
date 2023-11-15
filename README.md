@@ -1,13 +1,11 @@
 ## SC3020 Group 17 - SQL Query Explainer
 <p align="center">
-  <img src = >
-  
   <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/5e71e270-a1cc-4bde-9910-09a60996ea52>
 </p>
 
 ## Prerequisites
 ### Software
-1. PostgreSQL
+1. PostgreSQL ([Link](https://www.postgresql.org/download/))
 2. pgAdmin4 (for uploading databases into PostgreSQL)
 3. Python IDE (optional if running project from terminal)
 4. Python Installment (up to 3.11)
