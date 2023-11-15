@@ -145,11 +145,11 @@ class Login(object):
 
     def retranslateUi(self, login):
         _translate = QtCore.QCoreApplication.translate
-        login.setWindowTitle(_translate("login", "Login to Postgresql"))
+        login.setWindowTitle(_translate("login", "PostgreSQL Login"))
         self.loginButton.setText(_translate("login", "Login"))
         self.hostLabel.setText(_translate("login", "Host"))
         self.portLabel.setText(_translate("login", "Port"))
-        self.userLabel.setText(_translate("login", "User"))
+        self.userLabel.setText(_translate("login", "Username"))
         self.passLabel.setText(_translate("login", "Password"))
 
         self.hostInput.setText(self.login_details.host)
