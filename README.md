@@ -5,8 +5,8 @@
 
 ## Prerequisites
 ### Software
-1. PostgreSQL [Link](https://www.postgresql.org/download/)
-2. pgAdmin4 (for uploading databases into PostgreSQL)
+1. PostgreSQL [Download](https://www.postgresql.org/download/)
+2. pgAdmin4 [Download](https://www.pgadmin.org/download/)(for uploading databases into PostgreSQL)
 3. Python IDE (optional if running project from terminal)
 4. Python Installment (up to 3.11)
 #### Uploaded Databases from this link into PostgreSQL: [Database Folder](https://drive.google.com/drive/folders/103s8UBb36gKkrH6ORD5Vh8oYhqHZt1hN?usp=drive_link)
