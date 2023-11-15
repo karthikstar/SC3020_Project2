@@ -7,8 +7,8 @@
 ### Software
 1. PostgreSQL [Download](https://www.postgresql.org/download/)
 2. pgAdmin4 [Download](https://www.pgadmin.org/download/) (for uploading databases into PostgreSQL)
-3. Python IDE (optional if running project from terminal)
-4. Python Installment (up to 3.11)
+3. Python IDE [PyCharm Community Edition](https://www.jetbrains.com/pycharm/download/?section=windows) (Optional - if running project from terminal)
+4. Python Installment [Download](https://www.python.org/downloads/) (up to 3.11)
 #### Uploaded Databases from this link into PostgreSQL: [Database Folder](https://drive.google.com/drive/folders/103s8UBb36gKkrH6ORD5Vh8oYhqHZt1hN?usp=drive_link)
 
 ## How to Run our Project (2 Ways)
