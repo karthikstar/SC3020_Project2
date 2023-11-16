@@ -508,7 +508,6 @@ def retrieve_buffer_access_data(login_details: LoginDetails, querydetails: Query
         try:
             cursor.execute(query)
             query_data = cursor.fetchall()
-            print(str(query_data) + "\n\nLOL\n\n")
             # Extract the 'Plan' node from the structure
             top_level_plan = query_data[0][0][0]['Plan']
 
@@ -539,7 +538,8 @@ def retrieve_buffer_access_data(login_details: LoginDetails, querydetails: Query
         except Exception as e:
             print(f"An error occurred: {e}")
 
-def get_table_names_from_query (query):
+
+def get_table_names_from_query(query):
     table_names = []
 
     # Extract table name after the FROM clause
@@ -553,7 +553,8 @@ def get_table_names_from_query (query):
 
     return table_names
 
-# Returns an array of
+
+# Returns a dictionary of block number: number of tuples in query output in this block
 def retrieve_block_access_count(login_details: LoginDetails, querydetails: QueryDetails):
     with (DatabaseConnector(login_details, querydetails.database) as cursor):
         try:
@@ -576,10 +577,31 @@ def retrieve_block_access_count(login_details: LoginDetails, querydetails: Query
                         block_count[block_number] = 1
 
             # Print the block count
-            for block_number, count in block_count.items():
-                print(f"Block {block_number}: Accessed {count} times")
+            #for block_number, count in block_count.items():
+                #print(f"Block {block_number}: Accessed {count} times")
 
             return block_count
+
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+
+def retrieve_content_for_block_no(login_details: LoginDetails, querydetails: QueryDetails, block):
+    with (DatabaseConnector(login_details, querydetails.database) as cursor):
+        try:
+            table_names = ["customer", "lineitem", "nation", "orders", "part", "partsupp", "region", "supplier"]
+            data = {}
+            for table_name in table_names:
+                query = "select ctid,* from {} where (ctid::text::point)[0] = {} order by ctid;".format(table_name, block)
+                cursor.execute(query)
+                query_data = cursor.fetchall()
+                data[table_name] = query_data
+
+            # Print the block count
+            #for table, data in data.items():
+                #print(f"Table {table}: Data is {data}")
+
+            return data
 
         except Exception as e:
             print(f"An error occurred: {e}")
