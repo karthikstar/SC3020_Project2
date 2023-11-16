@@ -733,6 +733,8 @@ class MainUI(object):
 
         BINS = len(colorGradient)
         COST_DIFFERENTIAL = max(costs) - min(costs)
+        if COST_DIFFERENTIAL == 0:
+            COST_DIFFERENTIAL = 1
         colour = []
         for cost in costs:
             diff = cost - min(costs)
