@@ -43,19 +43,19 @@ class AnnotatorHelper:
         self.tablenumber = 0
         self.stepnumber = 0
 
-    def procedure_string(self, qep):
-        processingsteps = self.extract_natural_language(qep[0][0][0]['Plan'], True)[1]
+    def procedure_string(self, qep, buffer_data):
+        processingsteps = self.extract_natural_language(qep[0][0][0]['Plan'], True, buffer_data)[1]
         processingsteps = processingsteps[:-3]
         processingsteps += " and output our final results!"
         return processingsteps
 
-    def extract_natural_language(self, query, first_run):
+    def extract_natural_language(self, query, first_run, buffer_data):
         joined_tables_list = []
         procedure = ""
 
         if "Plans" in query:
             for plan in query["Plans"]:
-                temp = self.extract_natural_language(plan, False)
+                temp = self.extract_natural_language(plan, False, buffer_data)
                 joined_tables_list.append(temp[0])
                 procedure += temp[1]
 
@@ -68,7 +68,8 @@ class AnnotatorHelper:
             line_description = "Conduct SEQUENTIAL SCAN on table '{}' as '{}'".format(table, name)
             if "Filter" in query:
                 line_description += " under the condition {}".format(query["Filter"])
-            line_description += ". \n"
+            line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Seq Scan'])
+            line_description += "\n"
             return table, procedure + line_description
 
         elif query["Node Type"] == 'Index-Only Scan':
@@ -81,7 +82,8 @@ class AnnotatorHelper:
                 line_description += " for {}".format(query["Index Cond"])
             if "Filter" in query:
                 line_description += " under the condition {}".format(query["Filter"])
-            line_description += ". \n"
+            line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Index-Only Scan'])
+            line_description += "\n"
             return table, procedure + line_description
 
         elif query["Node Type"] == 'Index Scan':
@@ -94,7 +96,8 @@ class AnnotatorHelper:
                 line_description += " for {}".format(query["Index Cond"])
             if "Filter" in query:
                 line_description += " under the condition {}".format(query["Filter"])
-            line_description += ". \n"
+            line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Index Scan'])
+            line_description += "\n"
             return table, procedure + line_description
 
         elif query["Node Type"] == 'Foreign Scan':
@@ -351,6 +354,8 @@ def retrieve_query_data(login_details: LoginDetails, querydetails: QueryDetails)
         except:
             return None
 
+
+# Returns query list for parameter combinations
 def generate_combinations(self):
     # Checks number of parameters chosen >0
     list_of_parameters_chosen = interface.MainUI.doCheck(self)
@@ -459,6 +464,8 @@ def generate_combinations(self):
         query_list.append(temp)
     return query_list
 
+
+# Returns explain output of aqp
 def retrieve_aqp_data(login_details: LoginDetails, querydetails: QueryDetails, combinations):
     """
     Executes the AQPs and retrieves their corresponding costs.
@@ -468,11 +475,13 @@ def retrieve_aqp_data(login_details: LoginDetails, querydetails: QueryDetails, c
     for pairs in combinations:
         with DatabaseConnector(login_details, querydetails.database) as cursor:
             for key in pairs:
+                # Set respective parameters for aqp
                 if pairs[key]:
                     query += "SET " + key + " TO TRUE;"
                 else:
                     query += "SET " + key + " TO FALSE;"
 
+            # Below code gets AQP from running it with parameters set
             query += f'EXPLAIN (FORMAT JSON) {str(querydetails.query)};'
             try:
                 cursor.execute(query)
@@ -484,7 +493,47 @@ def retrieve_aqp_data(login_details: LoginDetails, querydetails: QueryDetails, c
 
         aqp_list.append(aqp)
 
+    # Returns AQP Plan
     return aqp_list
 
 
+#
+def retrieve_buffer_access_data(login_details: LoginDetails, querydetails: QueryDetails):
+    """
+    Return EXPLAIN (analyze, buffers, costs off) output and retrieves buffers number of shared hits
+    """
+    with DatabaseConnector(login_details, querydetails.database) as cursor:
+        query = f'EXPLAIN (analyze, buffers, costs off, format json) {str(querydetails.query)}'
+        try:
+            cursor.execute(query)
+            query_data = cursor.fetchall()
+            print(str(query_data) + "\n\nLOL\n\n")
+            # Extract the 'Plan' node from the structure
+            top_level_plan = query_data[0][0][0]['Plan']
 
+            # Define a function to recursively traverse the plan and extract shared hit counts
+            def extract_shared_hits(plan, shared_hits_per_operator):
+                node_type = plan.get('Node Type')
+                shared_hits = plan.get('Shared Hit Blocks', 0)
+
+                # Check if the operator is already in the dictionary, if not, add it
+                if node_type not in shared_hits_per_operator:
+                    shared_hits_per_operator[node_type] = 0
+
+                shared_hits_per_operator[node_type] += shared_hits
+
+                # Check for the presence of 'Plans' key before processing child nodes
+                if 'Plans' in plan:
+                    for child_plan in plan['Plans']:
+                        extract_shared_hits(child_plan, shared_hits_per_operator)
+
+            # Extract shared hit counts for each operator in the plan
+            shared_hits_per_operator = {}
+            extract_shared_hits(top_level_plan, shared_hits_per_operator)
+
+            # Print or use the collected information
+            for operator_name, shared_hits in shared_hits_per_operator.items():
+                print(f"{operator_name}: Shared Hit Blocks = {shared_hits}")
+            return shared_hits_per_operator
+        except Exception as e:
+            print(f"An error occurred: {e}")

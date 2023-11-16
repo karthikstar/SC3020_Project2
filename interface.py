@@ -10,6 +10,7 @@ class Login(object):
     def __init__(self, login_details):
         self.login_details = login_details
 
+    # Helper function to help setup widgets and layout for LOGIN UI
     def setupUi(self, login):
         login.setObjectName("login")
         login.resize(398, 289)
@@ -240,7 +241,7 @@ class Error(object):
         self.errorLabel.setText(self.msg)
         self.ackButton.clicked.connect(QtCore.QCoreApplication.instance().quit)
 
-
+# Helper to setup main page UI layout
 class MainUI(object):
 
     def __init__(self, login_details, db_list):
@@ -619,7 +620,7 @@ class MainUI(object):
         treeWid = {}
         for table in tables:
             treeWid[table] = get_columns_for_table(self.login_details, self.dbButton.currentText(), table)
-        print(treeWid)
+        #print(treeWid)
         for table in treeWid:
             tbl = QTreeWidgetItem([table])
             for column in treeWid[table]:
@@ -648,19 +649,19 @@ class MainUI(object):
         from project import Main
         alt_plans = Main.get_aqp(self, perm_list, self.dbButton.currentText(),
                                  self.queryInput.toPlainText())
-        print('perm', perm_list)
-        print('alt', alt_plans)
+        # print('perm', perm_list)
+        # print('alt', alt_plans)
 
         configs = ["QEP"]
         for i in range(0, len(alt_plans)):
             configs.append("AQP " + str(i + 1))
-        print('configs', configs)
+        # print('configs', configs)
 
         costs = [qep_cost]
         for i in alt_plans:
             total_cost = i['Total Cost']
             costs.append(total_cost)
-        print('costs', costs)
+        # print('costs', costs)
 
         BINS = len(colorGradient)
         COST_DIFFERENTIAL = max(costs) - min(costs)

@@ -1,6 +1,6 @@
 import sys
 from PyQt6 import QtWidgets
-from explore import get_database_names, LoginDetails, QueryDetails, retrieve_query_data, retrieve_aqp_data, AnnotatorHelper
+from explore import get_database_names, LoginDetails, QueryDetails, retrieve_query_data, retrieve_aqp_data, AnnotatorHelper, retrieve_buffer_access_data
 from interface import Login, Error, MainUI
 
 
@@ -19,13 +19,14 @@ class Main:
         """
         program = QtWidgets.QApplication(sys.argv)
         loginpage = QtWidgets.QWidget()
-        login_ui = Login(self.login_details)
 
-        login_ui.setupUi(loginpage)
-        loginpage.show()
-        program.exec()
+        login_ui = Login(self.login_details)  # Pass login details into Login class instance
 
-        return login_ui.login_details
+        login_ui.setupUi(loginpage) # Helper function to set UI layouts
+        loginpage.show() # Show login window
+        program.exec() #Runs main event loop
+
+        return login_ui.login_details # Returns the inputted login details to be updated in our Main class
 
     def load_main_page(self, db_list):
         """
@@ -33,9 +34,9 @@ class Main:
         """
         program = QtWidgets.QApplication(sys.argv)
         main_page = QtWidgets.QWidget()
-        main_ui = MainUI(self.login_details, db_list)
+        main_ui = MainUI(self.login_details, db_list) # Assign main_ui to instance of MainUI class
 
-        main_ui.setupUi(main_page)
+        main_ui.setupUi(main_page) # Call class method to setup its UI
         main_page.show()
         program.exec()
 
@@ -43,36 +44,38 @@ class Main:
         """
         Main application logic controller
         """
-        # Connect to db using login details
-        db_list = get_database_names(self.login_details)
+        db_list = get_database_names(self.login_details) # Function returns list of database names
 
-        # Obtain chosen database information & awaits user input
+        # Load main page of app
         self.load_main_page(db_list)
 
     def get_qep_from_query(self, database, query):
         """
         Function called when user submits a query input.
         """
+        # initialise
         query_details = QueryDetails
         query_details.database = database
         query_details.query = query
 
-        qep = retrieve_query_data(self.login_details, query_details)
+        qep = retrieve_query_data(self.login_details, query_details) # Gets output from EXPLAIN function
         if qep is None:
             return "Query is not valid. Try again.", -1
-        qep_with_details = AnnotatorHelper().procedure_string(qep)
-        return str(qep_with_details), qep[0][0][0]['Plan']['Total Cost']
+        buffer_data = retrieve_buffer_access_data(self.login_details, query_details)
+        qep_with_details = AnnotatorHelper().procedure_string(qep, buffer_data) # Helper function to get natural langauge of qep
+        return str(qep_with_details), qep[0][0][0]['Plan']['Total Cost'] # Return natural lang + total cost info
 
     def get_aqp(self, perm_list, database, query):
         """
         Function called to get generated alternative query plans
         """
+        # initialise
         querydetails = QueryDetails
         querydetails.database = database
         querydetails.query = query
 
-        aqp = retrieve_aqp_data(self.login_details, querydetails, perm_list)
-        return aqp
+        aqp = retrieve_aqp_data(self.login_details, querydetails, perm_list) # Passes in details and parameters list and get AQP Plan
+        return aqp # Return this plan
 
     # Standard error static method to be called throughout the 3 files
     @staticmethod
