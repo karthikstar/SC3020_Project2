@@ -46,7 +46,7 @@ class AnnotatorHelper:
 
     def procedure_string(self, qep, buffer_data):
         processingsteps = self.extract_natural_language(qep[0][0][0]['Plan'], True, buffer_data)[1]
-        processingsteps = processingsteps[:-3]
+        processingsteps = processingsteps[:-1]
         processingsteps += " \n\nAnd we get our final results!"
         processingsteps += "\n\n Total Buffer Shared Hits: {}".format(sum(buffer_data.values()))
         processingsteps += "\n Planning Time: {}".format(retrieve_other_stats(LoginDetails, QueryDetails)[0])
