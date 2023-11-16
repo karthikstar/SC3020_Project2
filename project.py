@@ -1,6 +1,8 @@
 import sys
 from PyQt6 import QtWidgets
-from explore import get_database_names, LoginDetails, QueryDetails, retrieve_query_data, retrieve_aqp_data, retrieve_content_for_block_no, AnnotatorHelper, retrieve_buffer_access_data, retrieve_block_access_count
+from explore import get_database_names, LoginDetails, QueryDetails, retrieve_query_data, retrieve_aqp_data, \
+    retrieve_content_for_block_no, AnnotatorHelper, retrieve_buffer_access_data, retrieve_block_access_count, \
+    retrieve_other_stats
 from interface import Login, Error, MainUI
 
 
@@ -59,6 +61,7 @@ class Main:
         query_details.query = query
 
         #print(Main.get_content_in_specified_block(self, database, query, 10))
+        # print(Main.get_other_stats(self, database, query))
 
         qep = retrieve_query_data(self.login_details, query_details) # Gets output from EXPLAIN function
         if qep is None:
@@ -98,6 +101,14 @@ class Main:
 
         block_content = retrieve_content_for_block_no(self.login_details, querydetails, block)
         return block_content
+
+    def get_other_stats(self, database, query):
+        querydetails = QueryDetails
+        querydetails.database = database
+        querydetails.query = query
+
+        other_stats = retrieve_other_stats(self.login_details, querydetails)
+        return other_stats
 
     # Standard error static method to be called throughout the 3 files
     @staticmethod
