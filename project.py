@@ -1,6 +1,6 @@
 import sys
 from PyQt6 import QtWidgets
-from explore import get_database_names, LoginDetails, QueryDetails, retrieve_query_data, retrieve_aqp_data, AnnotatorHelper, retrieve_buffer_access_data
+from explore import get_database_names, LoginDetails, QueryDetails, retrieve_query_data, retrieve_aqp_data, AnnotatorHelper, retrieve_buffer_access_data, retrieve_block_access_count
 from interface import Login, Error, MainUI
 
 
@@ -76,6 +76,15 @@ class Main:
 
         aqp = retrieve_aqp_data(self.login_details, querydetails, perm_list) # Passes in details and parameters list and get AQP Plan
         return aqp # Return this plan
+
+    def get_block_access_data(self, database, query):
+        # initialise
+        querydetails = QueryDetails
+        querydetails.database = database
+        querydetails.query = query
+
+        block_data = retrieve_block_access_count(self.login_details, querydetails)
+        return block_data
 
     # Standard error static method to be called throughout the 3 files
     @staticmethod
