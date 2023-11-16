@@ -499,6 +499,7 @@ def retrieve_aqp_data(login_details: LoginDetails, querydetails: QueryDetails, c
 
 
 # Returns dictionary of buffer shared hits data against each physical operator used in plan.
+# {parameter : no. of buffered shared hits , parameter2: no. of buffered shared hits..}
 def retrieve_buffer_access_data(login_details: LoginDetails, querydetails: QueryDetails):
     """
     Return EXPLAIN (analyze, buffers, costs off) output and retrieves buffers number of shared hits

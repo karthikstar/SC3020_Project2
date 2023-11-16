@@ -402,7 +402,7 @@ class MainUI(object):
 
         # Graph Window for visualising total costs for each plan
         self.graphWindow = pg.PlotWidget(MainUi)
-        self.graphWindow.setGeometry(QtCore.QRect(10, 490, 1325, 300))
+        self.graphWindow.setGeometry(QtCore.QRect(10, 490, 600, 300))
         self.graphWindow.setStyleSheet("color: \"#eaebf2\";\n"
                                        "font: 12px;\n"
                                        "background-color: \"#EFF5F9\";\n"
@@ -438,6 +438,17 @@ class MainUI(object):
         self.selectParamsLabel.setFont(font)
         self.selectParamsLabel.setStyleSheet("color: \"#6a6b79\";\n""font: 12px")
         self.selectParamsLabel.setObjectName("selectParamsLabel")
+
+
+        # List showing block no.s and their respective no.of accesses
+        self.blockAccessList = QtWidgets.QTreeWidget(MainUi)
+        self.blockAccessList.setGeometry(QtCore.QRect(1080, 500, 250, 250))
+        self.blockAccessList.setStyleSheet("color: \"#018076\";\n"
+                                            "font: 12px")
+        self.blockAccessList.setColumnCount(1)
+        self.blockAccessList.setObjectName("blockAccessList")
+        self.blockAccessList.headerItem().setText(0, "Block Statistics")
+
 
         #Checkbox Implenentation
 
@@ -690,6 +701,7 @@ class MainUI(object):
             treeWid_aqp[key] = value
 
         self.planList.clear()
+        self.blockAccessList.clear()
 
         for table in treeWid_aqp:
             tbl = QTreeWidgetItem([table])
@@ -697,3 +709,16 @@ class MainUI(object):
                 col = QTreeWidgetItem([column])
                 tbl.addChild(col)
             self.planList.addTopLevelItem(tbl)
+
+        block_access_data = Main.get_block_access_data(self, self.dbButton.currentText(),
+                            self.queryInput.toPlainText())
+
+        # print(block_access_data)
+        for key in block_access_data:
+            tbl = QTreeWidgetItem(["Block " + str(key)])
+            col = QTreeWidgetItem(["No. Of Accesses: " + str(block_access_data[key])])
+            tbl.addChild(col)
+            self.blockAccessList.addTopLevelItem(tbl)
+
+
+
