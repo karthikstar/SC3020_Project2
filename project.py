@@ -77,6 +77,7 @@ class Main:
         aqp = retrieve_aqp_data(self.login_details, querydetails, perm_list) # Passes in details and parameters list and get AQP Plan
         return aqp # Return this plan
 
+    #Returns a dictionary {block 0 : count , block1: count.. } - this is the no. of the times each block got accsed for this query
     def get_block_access_data(self, database, query):
         # initialise
         querydetails = QueryDetails
