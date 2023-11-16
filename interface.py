@@ -449,6 +449,15 @@ class MainUI(object):
         self.blockAccessList.setObjectName("blockAccessList")
         self.blockAccessList.headerItem().setText(0, "Block Statistics")
 
+        # List showing block no.s and their respective content (divided into respective tables)
+        self.blockContentList = QtWidgets.QTreeWidget(MainUi)
+        self.blockContentList.setGeometry(QtCore.QRect(620, 500, 420, 250))
+        self.blockContentList.setStyleSheet("color: \"#018076\";\n"
+                                            "font: 12px")
+        self.blockContentList.setColumnCount(1)
+        self.blockContentList.setObjectName("blockContentList")
+        self.blockContentList.headerItem().setText(0, "Content in Accessed Blocks")
+
 
         #Checkbox Implenentation
 
@@ -648,6 +657,54 @@ class MainUI(object):
                                                       self.queryInput.toPlainText())
         self.optPlanWindow.setText(annotation)
 
+        self.blockAccessList.clear()
+        self.blockContentList.clear()
+
+        block_access_data = Main.get_block_access_data(self, self.dbButton.currentText(),
+                                                       self.queryInput.toPlainText())
+
+        # print(block_access_data)
+        accesed_blocks = [] #keep track of block no.s which are accessed
+        for key in block_access_data:
+            accesed_blocks.append(key)
+            tbl = QTreeWidgetItem(["Block " + str(key)])
+            col = QTreeWidgetItem(["No. Of Accesses: " + str(block_access_data[key])])
+            # swag = QTreeWidgetItem(["sadsadsa"])
+            tbl.addChild(col)
+            # col.addChild(swag)
+            self.blockAccessList.addTopLevelItem(tbl)
+
+        # blockContent = {}
+        # for block_no in accesed_blocks:
+        #     blockContent[block_no] = Main.get_content_in_specified_block(self, self.dbButton.currentText(),
+        #                                                                  self.queryInput.toPlainText(), block_no)
+        # block_no = 20000
+        # blockContent[block_no] = Main.get_content_in_specified_block(self, self.dbButton.currentText(),
+        #                                                                  self.queryInput.toPlainText(), block_no)
+
+        for blockNo in accesed_blocks:
+            blockContentTemp = Main.get_content_in_specified_block(self, self.dbButton.currentText(),
+                                                                         self.queryInput.toPlainText(), blockNo)
+            block = QTreeWidgetItem(["Block " + str(blockNo)])
+            for tableNo in blockContentTemp:
+                msg = ""
+                if len(blockContentTemp[tableNo]) == 0:
+                    msg = " -- No Records"
+                else:
+                    msg = " -- " + str(len(blockContentTemp[tableNo])) + " Records"
+                table = QTreeWidgetItem(["Table " + str(tableNo) + msg])
+                block.addChild(table)
+                for tuple in blockContentTemp[tableNo]:
+                    tuple = QTreeWidgetItem([str(tuple)])
+                    table.addChild(tuple)
+
+            self.blockContentList.addTopLevelItem(block)
+
+
+
+
+
+
         import explore
         perm_list = explore.generate_combinations(self)
 
@@ -701,7 +758,7 @@ class MainUI(object):
             treeWid_aqp[key] = value
 
         self.planList.clear()
-        self.blockAccessList.clear()
+        # self.blockAccessList.clear()
 
         for table in treeWid_aqp:
             tbl = QTreeWidgetItem([table])
@@ -710,15 +767,15 @@ class MainUI(object):
                 tbl.addChild(col)
             self.planList.addTopLevelItem(tbl)
 
-        block_access_data = Main.get_block_access_data(self, self.dbButton.currentText(),
-                            self.queryInput.toPlainText())
-
-        # print(block_access_data)
-        for key in block_access_data:
-            tbl = QTreeWidgetItem(["Block " + str(key)])
-            col = QTreeWidgetItem(["No. Of Accesses: " + str(block_access_data[key])])
-            tbl.addChild(col)
-            self.blockAccessList.addTopLevelItem(tbl)
+        # block_access_data = Main.get_block_access_data(self, self.dbButton.currentText(),
+        #                     self.queryInput.toPlainText())
+        #
+        # # print(block_access_data)
+        # for key in block_access_data:
+        #     tbl = QTreeWidgetItem(["Block " + str(key)])
+        #     col = QTreeWidgetItem(["No. Of Accesses: " + str(block_access_data[key])])
+        #     tbl.addChild(col)
+        #     self.blockAccessList.addTopLevelItem(tbl)
 
 
 
