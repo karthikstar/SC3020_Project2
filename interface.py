@@ -1,5 +1,5 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QTreeWidgetItem
+from PyQt6.QtWidgets import QTreeWidgetItem, QHeaderView
 import pyqtgraph as pg
 
 colorGradient = ["#DDF4F6", "#BCF1F5", "#99EDF3", "#77ECF5", "#47E4F0", "#0CD4E3", "#06C0CE", "#04A6B2", "#01818A",
@@ -389,7 +389,7 @@ class MainUI(object):
 
         # Label for alternative plan graph
         self.graphLabel = QtWidgets.QLabel(MainUi)
-        self.graphLabel.setGeometry(QtCore.QRect(500, 470, 871, 16))
+        self.graphLabel.setGeometry(QtCore.QRect(200, 470, 400, 16))
         font = QtGui.QFont()
         font.setPointSize(-1)
         font.setBold(False)
@@ -442,7 +442,7 @@ class MainUI(object):
 
         # List showing block no.s and their respective no.of accesses
         self.blockAccessList = QtWidgets.QTreeWidget(MainUi)
-        self.blockAccessList.setGeometry(QtCore.QRect(1080, 500, 250, 250))
+        self.blockAccessList.setGeometry(QtCore.QRect(1080, 470, 250, 300))
         self.blockAccessList.setStyleSheet("color: \"#018076\";\n"
                                             "font: 12px")
         self.blockAccessList.setColumnCount(1)
@@ -451,11 +451,12 @@ class MainUI(object):
 
         # List showing block no.s and their respective content (divided into respective tables)
         self.blockContentList = QtWidgets.QTreeWidget(MainUi)
-        self.blockContentList.setGeometry(QtCore.QRect(620, 500, 420, 250))
+        self.blockContentList.setGeometry(QtCore.QRect(620, 470, 440, 300))
         self.blockContentList.setStyleSheet("color: \"#018076\";\n"
                                             "font: 12px")
         self.blockContentList.setColumnCount(1)
         self.blockContentList.setObjectName("blockContentList")
+        self.blockContentList.setColumnWidth(0,2000)
         self.blockContentList.headerItem().setText(0, "Content in Accessed Blocks")
 
 
