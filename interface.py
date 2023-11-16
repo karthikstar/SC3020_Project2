@@ -451,7 +451,7 @@ class MainUI(object):
 
         # List showing block no.s and their respective content (divided into respective tables)
         self.blockContentList = QtWidgets.QTreeWidget(MainUi)
-        self.blockContentList.setGeometry(QtCore.QRect(620, 470, 440, 300))
+        self.blockContentList.setGeometry(QtCore.QRect(620, 470, 450, 300))
         self.blockContentList.setStyleSheet("color: \"#018076\";\n"
                                             "font: 12px")
         self.blockContentList.setColumnCount(1)
