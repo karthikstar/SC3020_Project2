@@ -1,4 +1,5 @@
 import numpy as np
+import re
 import interface
 import psycopg2
 import itertools
@@ -497,7 +498,7 @@ def retrieve_aqp_data(login_details: LoginDetails, querydetails: QueryDetails, c
     return aqp_list
 
 
-#
+# Returns dictionary of buffer shared hits data against each physical operator used in plan.
 def retrieve_buffer_access_data(login_details: LoginDetails, querydetails: QueryDetails):
     """
     Return EXPLAIN (analyze, buffers, costs off) output and retrieves buffers number of shared hits
@@ -535,5 +536,50 @@ def retrieve_buffer_access_data(login_details: LoginDetails, querydetails: Query
             for operator_name, shared_hits in shared_hits_per_operator.items():
                 print(f"{operator_name}: Shared Hit Blocks = {shared_hits}")
             return shared_hits_per_operator
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+def get_table_names_from_query (query):
+    table_names = []
+
+    # Extract table name after the FROM clause
+    from_match = re.search(r'FROM\s+(\w+)', query, re.IGNORECASE)
+    if from_match:
+        table_names.append(from_match.group(1))
+
+    # Extract table names after each JOIN clause
+    join_tables = re.findall(r'JOIN\s+(\w+)', query, re.IGNORECASE)
+    table_names.extend(join_tables)
+
+    return table_names
+
+# Returns an array of
+def retrieve_block_access_count(login_details: LoginDetails, querydetails: QueryDetails):
+    with (DatabaseConnector(login_details, querydetails.database) as cursor):
+        try:
+            query = str(querydetails.query).lower()
+            table_names = get_table_names_from_query(query)
+            block_count = {}
+            for table_name in table_names:
+                modified_query = query.replace("select", "select {}.ctid, ".format(table_name))
+                cursor.execute(modified_query)
+                query_data = cursor.fetchall()
+                # print(str(query_data))
+                # Parse and count accessed blocks
+                for row in query_data:
+                    # The ctid is a tuple (block_number, index_within_block)
+                    block_number = int(row[0].strip('()').split(',')[0])
+                    # Count the accessed blocks
+                    if block_number in block_count:
+                        block_count[block_number] += 1
+                    else:
+                        block_count[block_number] = 1
+
+            # Print the block count
+            for block_number, count in block_count.items():
+                print(f"Block {block_number}: Accessed {count} times")
+
+            return block_count
+
         except Exception as e:
             print(f"An error occurred: {e}")
