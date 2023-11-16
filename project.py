@@ -1,6 +1,6 @@
 import sys
 from PyQt6 import QtWidgets
-from explore import get_database_names, LoginDetails, QueryDetails, retrieve_query_data, retrieve_aqp_data, AnnotatorHelper, retrieve_buffer_access_data, retrieve_block_access_count
+from explore import get_database_names, LoginDetails, QueryDetails, retrieve_query_data, retrieve_aqp_data, retrieve_content_for_block_no, AnnotatorHelper, retrieve_buffer_access_data, retrieve_block_access_count
 from interface import Login, Error, MainUI
 
 
@@ -58,6 +58,8 @@ class Main:
         query_details.database = database
         query_details.query = query
 
+        #print(Main.get_content_in_specified_block(self, database, query, 10))
+
         qep = retrieve_query_data(self.login_details, query_details) # Gets output from EXPLAIN function
         if qep is None:
             return "Query is not valid. Try again.", -1
@@ -86,6 +88,16 @@ class Main:
 
         block_data = retrieve_block_access_count(self.login_details, querydetails)
         return block_data
+
+    # Returns a dictionary with key:value where key is table name, and value is the table's content for the specified block
+    def get_content_in_specified_block(self, database, query, block):
+        # initialise
+        querydetails = QueryDetails
+        querydetails.database = database
+        querydetails.query = query
+
+        block_content = retrieve_content_for_block_no(self.login_details, querydetails, block)
+        return block_content
 
     # Standard error static method to be called throughout the 3 files
     @staticmethod
