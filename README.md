@@ -16,7 +16,7 @@
 1. Ensure that you have installed the above software into your system.
 2. Open up the Database Folder link above & download the files in (.zip).
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/6e1a2186-a7fa-419f-bf40-11e5bb3cb7f6>
 </p>
 3. Unzip the downloaded .zip file & ensure that you have the 8 .csv databases below. 
 <p align="center">
