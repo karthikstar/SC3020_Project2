@@ -316,6 +316,8 @@ class AnnotatorHelper:
 
         else:
             line_description = "EXECUTE {}. \n".format(query["Node Type"])
+            if len(joined_tables_list) == 0:
+                return procedure + line_description
             return joined_tables_list[0], procedure + line_description
 
 
