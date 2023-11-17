@@ -32,6 +32,8 @@
 5. Access your PostgreSQL through the left menu & expand the menu to see the 'Databases' Icon.
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/d4b1e541-0914-4dbe-851d-adaec5f8a6a8>
+</p>
+<p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/99d6b18a-727a-49a4-a6c8-c5fc0d4b55f0>
 </p>
 
@@ -43,25 +45,31 @@
 7. Enter 'TPC-H' as the database name (or any names you like) & click 'Save'.
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/217d1f6e-9906-410c-8dbc-0e29efda482a>
+</p>
+<p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/4bb3de2d-9f2c-4489-b6cb-3e1fe1d8f141>
 </p>
 
 8. Now, you should see your created database name in the left menu. Right click on it & access the 'Query Tool' option.
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/026d3b74-575f-44c9-b0f6-d6abb93e0e33>
+</p>
+<p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/0b20f1ba-1773-4c3f-9449-2266173663dd>
 </p>
 
 9. Access the code stored in the file schema.sql under our project directory's database folder. Copy this code into the Query Tool and hit the run/F5 button.
 <p align="center">
-
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/9c8e11ae-298d-4820-8b9c-3650b0dfd565>
+</p>
+<p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/5f90d9cb-25b9-4e46-a294-d936464414e4>
 </p>
 
 10. Now, the respective tables should be created under the created 'TPC-H' database in the left menu.
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/87fa1e7d-0a19-4a72-8397-9cde53bdfda5>
+</p>
 
 11. Right-click any of the table names & access the 'Import/Export Data..' menu.
 <p align="center">
@@ -72,8 +80,8 @@
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/c9355613-d375-4123-928e-814d81888637>
 </p>
-Filename: Select the correct respective .csv database file for your selected table, then click 'Ok'.  
-Format:  CSV
+Filename: Select the correct respective .csv database file for your selected table, then click 'Ok'.     
+Format: CSV
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/bfc510b7-526c-4dc0-a1c7-c595accfb0a9>
 </p>
