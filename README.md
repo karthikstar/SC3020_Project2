@@ -105,12 +105,8 @@ Escape: ' <br>
 NULL Strings: <br>
 </p>
 
-<p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/636565ef-4375-42c9-9104-0470003c27da>
-</p>
 
-
-13. Repeat Steps 11-12 for all 7 other tables in the database **IN THR ORDER region, nation, customer, supplier, part, partsupp, orders, lineitem**!
+13. Repeat Steps 11-12 for all 7 other tables in the database **IN THE ORDER region, nation, customer, supplier, part, partsupp, orders, lineitem**!
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/f6ec9932-c306-416a-8247-10bc914d3b98>
 </p>
