@@ -18,7 +18,7 @@
 
 3. Unzip the downloaded .zip file & ensure that you have the 8 .csv databases below. 
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/eb7c0b65-ccd2-42be-9767-207bf027997d>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/175b73a8-48e1-46a3-b43c-9d318ea73398>
 </p>
 
 4. Open up pgAdmin4.
