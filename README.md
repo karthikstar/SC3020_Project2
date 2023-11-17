@@ -121,10 +121,11 @@ NULL Strings: <br>
 1. Open Terminal/Command Prompt
 
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/24cfd224-b7a7-41a4-9476-b9823e398b3d>
 
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/cce40d56-9545-470d-9298-d668015ed6e7>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/71978afc-432f-4401-9cc3-5d7d5e039dcb>
 </p>
+
 
 2. Enter the following commands in order:
 ```sh
@@ -146,8 +147,9 @@ pyqtgraph==0.13.1
 
 2.	Open the Project Folder in your IDE
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/cab0d4ca-62dc-4950-ae4b-8d3484ea8f55>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/f61586dd-8cd0-4766-8244-c5b55e9ffe1c>
 </p>
+
 
 
 3.	Two warnings should appear in yellow highlights at the top of the code. Click 'Configure Python Interpreter'.
@@ -208,10 +210,12 @@ pyqtgraph==0.13.1
 
 13. Login to the app using the login details you created during your installation of PostgreSQL, the password & port number. Default options for host and username would be pre-filled in the window.
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/250db4e8-579a-488a-88c9-43e5b03c0e55>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/e75550fc-2426-4d88-97e1-4f9b4635e7d6>
 </p>
+
 
 14. You should now be on the main page of our application. Ready to run your own queries?
 <p align="center">
-  <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/260c050e-8b43-4f75-add2-688966725b7e>
+  <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/de194854-2a88-49ed-a873-5b900edd9caf>
 </p>
+
