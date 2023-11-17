@@ -43,14 +43,14 @@
 
 7. Enter 'TPC-H' as the database name (or any names you like) & click 'Save'.
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/4bb3de2d-9f2c-4489-b6cb-3e1fe1d8f141>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/026d3b74-575f-44c9-b0f6-d6abb93e0e33>
 </p>
 
 8. Now, you should see your created database name in the left menu. Right click on it & access the 'Query Tool' option.
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/0b20f1ba-1773-4c3f-9449-2266173663dd>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/9c8e11ae-298d-4820-8b9c-3650b0dfd565>
 </p>
 
 9. Access the code stored in the file schema.sql under our project directory's database folder. Copy this code into the Query Tool and hit the run/F5 button.
