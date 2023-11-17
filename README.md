@@ -1,6 +1,3 @@
-![Screenshot_17](https://github.com/karthikstar/SC3020_Project2/assets/22176064/e2fafe29-292a-4e95-b1a8-319dce015044)## SC3020 Group 17 - SQL Query Explainer
-
-
 ## Prerequisites
 ### Software
 1. PostgreSQL [Download](https://www.postgresql.org/download/) (**Remember to note down the password & port number inputted during installation**)
