@@ -750,17 +750,20 @@ class MainUI(object):
                                                        self.queryInput.toPlainText())
 
         # print(block_access_data)
-        accesed_blocks = [] #keep track of block no.s which are accessed
-        for key in block_access_data:
-            accesed_blocks.append(key)
-            tbl = QTreeWidgetItem(["Block " + str(key)])
-            col = QTreeWidgetItem(["No. Of Accesses: " + str(block_access_data[key])])
-            # swag = QTreeWidgetItem(["sadsadsa"])
-            tbl.addChild(col)
-            # col.addChild(swag)
-            self.blockAccessList.addTopLevelItem(tbl)
+        accessed_blocks = [] #keep track of block no.s which are accessed
+        try:
+            for key in block_access_data:
+                accessed_blocks.append(key)
+                tbl = QTreeWidgetItem(["Block " + str(key)])
+                col = QTreeWidgetItem(["No. Of Accesses: " + str(block_access_data[key])])
+                # swag = QTreeWidgetItem(["sadsadsa"])
+                tbl.addChild(col)
+                # col.addChild(swag)
+                self.blockAccessList.addTopLevelItem(tbl)
+        except Exception:
+            pass
 
-        self.accessed_blocks = accesed_blocks
+        self.accessed_blocks = accessed_blocks
         self.retrieve_next_blocks()
 
         import explore
