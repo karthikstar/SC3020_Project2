@@ -72,8 +72,8 @@
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/c9355613-d375-4123-928e-814d81888637>
 </p>
-Filename: Select the correct respective .csv database file for your selected table, then click 'Ok'.
-Format:  csv
+Filename: Select the correct respective .csv database file for your selected table, then click 'Ok'.  
+Format:  CSV
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/bfc510b7-526c-4dc0-a1c7-c595accfb0a9>
 </p>
