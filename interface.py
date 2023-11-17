@@ -10,7 +10,6 @@ class Login(object):
     def __init__(self, login_details):
         self.login_details = login_details
 
-    # Helper function to help setup widgets and layout for LOGIN UI
     def setupUi(self, login):
         login.setObjectName("login")
         login.resize(398, 289)
@@ -377,7 +376,7 @@ class MainUI(object):
 
         # optPlanWindow - Window for Optimal Query Plan
         self.optPlanWindow = QtWidgets.QLabel(MainUi)
-        self.optPlanWindow.setGeometry(QtCore.QRect(620, 50, 450, 410))
+        self.optPlanWindow.setGeometry(QtCore.QRect(620, 50, 450, 375))
         font = QtGui.QFont()
         font.setPointSize(-1)
         font.setBold(False)
@@ -392,6 +391,26 @@ class MainUI(object):
             QtCore.Qt.AlignmentFlag.AlignLeading | QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignTop)
         self.optPlanWindow.setWordWrap(True)
         self.optPlanWindow.setObjectName("optPlanWindow")
+
+
+        # Window to provide stats on how many blocks have been accessed
+        self.blockStatsWindow = QtWidgets.QLabel(MainUi)
+        self.blockStatsWindow.setGeometry(QtCore.QRect(620, 430, 710, 30))
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.blockStatsWindow.setFont(font)
+        self.blockStatsWindow.setStyleSheet("color: \"#ffffff\";\n"
+                                         "font: 12px;\n"
+                                         "background-color: \"#018076\";\n"
+                                         "padding: 5px"
+                                        )
+        self.blockStatsWindow.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignLeading | QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignTop)
+        self.blockStatsWindow.setWordWrap(True)
+        self.blockStatsWindow.setObjectName("blockStatsWindow")
 
         # Label for optimal query plan window
         self.optplanLabel = QtWidgets.QLabel(MainUi)
@@ -439,7 +458,7 @@ class MainUI(object):
 
         # List showing QEP and all alternative query plans
         self.planList = QtWidgets.QTreeWidget(MainUi)
-        self.planList.setGeometry(QtCore.QRect(1080, 210, 250, 250))
+        self.planList.setGeometry(QtCore.QRect(1080, 210, 250, 215))
         self.planList.setStyleSheet("color: \"#018076\";\n"
                                             "font: 12px")
         self.planList.setColumnCount(1)
@@ -461,12 +480,12 @@ class MainUI(object):
 
         # List showing block no.s and their respective no.of accesses
         self.blockAccessList = QtWidgets.QTreeWidget(MainUi)
-        self.blockAccessList.setGeometry(QtCore.QRect(1080, 470, 250, 300))
+        self.blockAccessList.setGeometry(QtCore.QRect(1080, 470, 250, 310))
         self.blockAccessList.setStyleSheet("color: \"#018076\";\n"
                                             "font: 12px")
         self.blockAccessList.setColumnCount(1)
         self.blockAccessList.setObjectName("blockAccessList")
-        self.blockAccessList.headerItem().setText(0, "Block Statistics")
+        self.blockAccessList.headerItem().setText(0, "Accessed Block Statistics")
 
         # List showing block no.s and their respective content (divided into respective tables)
         self.blockContentList = QtWidgets.QTreeWidget(MainUi)
@@ -477,7 +496,6 @@ class MainUI(object):
         self.blockContentList.setObjectName("blockContentList")
         self.blockContentList.setColumnWidth(0,2000)
         self.blockContentList.headerItem().setText(0, "Content in Accessed Blocks")
-
 
         #Checkbox Implenentation
 
@@ -571,6 +589,7 @@ class MainUI(object):
         self.inputQueryLabel.raise_()
         self.headerLabel.raise_()
         self.optPlanWindow.raise_()
+        self.blockStatsWindow.raise_()
         self.optplanLabel.raise_()
         self.graphLabel.raise_()
 
@@ -583,13 +602,15 @@ class MainUI(object):
         MainUi.setWindowTitle(_translate("MainUi", "SC3020 Grp 17 Project 2"))
         self.executeButton.setText(_translate("MainUi", "Execute Query"))
 
-        self.selNextBtn.setText(_translate("MainUi", "Retrieve Next 5 Blocks Accessed"))
+        self.selNextBtn.setText(_translate("MainUi", "Next 5 Accessed Blocks"))
 
         self.selectDBLabel.setText(_translate("MainUi", "Select database"))
         self.headerLabel.setText(_translate("MainUi", "SQL Query Explorer - By Grp 17"))
         self.inputQueryLabel.setText(_translate("MainUi", "Input Query Below"))
         self.optPlanWindow.setText(_translate("MainUi",
                                           "The QEP will be displayed in natural language here once you click \"Run Query\""))
+        self.blockStatsWindow.setText(_translate("MainUi",
+                                          "Total No. Of Blocks Accessed For Query:"))
         self.optplanLabel.setText(_translate("MainUi", "Optimal Query Plan Generated"))
         self.graphLabel.setText(
             _translate("MainUi", "Total Cost Visualisation of Different Plans"))
@@ -707,6 +728,15 @@ class MainUI(object):
 
             self.blockContentList.addTopLevelItem(block)
 
+        if(newBlocksAccessCtr == len(self.accessed_blocks)):
+            self.selNextBtn.setDisabled(True)
+            self.selNextBtn.setStyleSheet("background-color: \"#949398\";\n"
+                                          "color: #ffffff;\n"
+                                          "border-style: outset;\n"
+                                          "border-radius: 2px;\n"
+                                          "font: 14px")
+            self.selNextBtn.setText("All Accessed Blocks have been visualized")
+
     def show_accessed_blocks(self, accesed_blocks):
         from project import Main
         for blockNo in accesed_blocks:
@@ -738,6 +768,15 @@ class MainUI(object):
         self.blockContentList.clear()
         self.planList.clear()
 
+        #Reset Button Info
+        self.selNextBtn.setDisabled(False)
+        self.selNextBtn.setStyleSheet("background-color: \"#004146\";\n"
+                                         "color: #ffffff;\n"
+                                         "border-style: outset;\n"
+                                         "border-radius: 2px;\n"
+                                         "font: 14px")
+        self.selNextBtn.setText("Visualize Next 5 Blocks Accessed")
+
         from project import Main
         annotation, qep_cost = Main.get_qep_from_query(self, self.dbButton.currentText(),
                                                       self.queryInput.toPlainText())
@@ -750,6 +789,7 @@ class MainUI(object):
                                                        self.queryInput.toPlainText())
 
         # print(block_access_data)
+
         accessed_blocks = [] #keep track of block no.s which are accessed
         try:
             for key in block_access_data:
@@ -764,6 +804,7 @@ class MainUI(object):
             pass
 
         self.accessed_blocks = accessed_blocks
+
         self.retrieve_next_blocks()
 
         import explore
