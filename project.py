@@ -92,6 +92,15 @@ class Main:
         block_data = retrieve_block_access_count(self.login_details, querydetails)
         return block_data
 
+    def get_total_block_access_count(self, database, query):
+        # initialise
+        querydetails = QueryDetails
+        querydetails.database = database
+        querydetails.query = query
+
+        block_data = retrieve_block_access_count(self.login_details, querydetails)
+        return sum(block_data.values())
+
     # Returns a dictionary with key:value where key is table name, and value is the table's content for the specified block
     def get_content_in_specified_block(self, database, query, block):
         # initialise
