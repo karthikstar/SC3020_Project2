@@ -1,4 +1,4 @@
-## SC3020 Group 17 - SQL Query Explainer
+![image](https://github.com/karthikstar/SC3020_Project2/assets/22176064/656dccc2-31d4-423a-bec6-4c7abfae6b6c)## SC3020 Group 17 - SQL Query Explainer
 <p align="center">
   <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/260c050e-8b43-4f75-add2-688966725b7e>
 </p>
@@ -11,6 +11,41 @@
 3. Python IDE [PyCharm Community Edition](https://www.jetbrains.com/pycharm/download/?section=windows) (Optional - if running project from terminal)
 4. Python Installment [Download](https://www.python.org/downloads/) (compatible up to 3.11)
 #### Uploaded Databases to be loaded into PostgreSQL: [Database Folder](https://drive.google.com/drive/folders/103s8UBb36gKkrH6ORD5Vh8oYhqHZt1hN?usp=drive_link)
+
+## Before running our Project Code
+1. Ensure that you have installed the above software into your system.
+2. Open up the Database Folder link above & download the files in (.zip).
+<p align="center">
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+</p>
+3. Unzip the downloaded .zip file & ensure that you have the 8 .csv databases below. 
+<p align="center">
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+</p>
+4. Open up pgAdmin4.
+<p align="center">
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+</p>
+5. Access your PostgreSQL through the left menu & expand the menu to see the 'Databases' Icon.
+<p align="center">
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+</p>
+6. Right click 'Databases' to show the menu and access the database creation menu. 
+<p align="center">
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+</p>
+7. Enter 'TPC-H' as the database name (or any names you like) & click 'Save'.
+<p align="center">
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+</p>
+8. Now, you should see your created database name in the left menu. Right click on it & access the 'Query Tool' option.
+<p align="center">
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+</p>
 
 ## How to Run our Project (2 Ways)
 
