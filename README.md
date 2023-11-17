@@ -199,7 +199,7 @@ pyqtgraph==0.13.1
 <img src = https://user-images.githubusercontent.com/49341007/202510687-2fef0618-6001-472b-933b-8ff4ed9c1b27.png>
 </p>
 
-13. Login to the app using the login details you created during your installation of PostgreSQL.
+13. Login to the app using the login details you created during your installation of PostgreSQL, the password & port number. Default options for host and username would be pre-filled in the window.
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/250db4e8-579a-488a-88c9-43e5b03c0e55>
 </p>
