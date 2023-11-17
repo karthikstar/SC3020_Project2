@@ -80,19 +80,25 @@
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/c9355613-d375-4123-928e-814d81888637>
 </p>
-<p>
+
+<p align="center">
 Filename: Select the correct respective .csv database file for your selected table, then click 'Ok'.  <br>   
 Format: CSV
 </p>
+
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/bfc510b7-526c-4dc0-a1c7-c595accfb0a9>
 </p>
-OID: Off
-Header: Off
-Delimiter: |
-Quote: "
-Escape: '
-NULL Strings:
+
+<p align="center">
+OID: Off <br>
+Header: Off <br>
+Delimiter: | <br>
+Quote: " <br>
+Escape: ' <br>
+NULL Strings: <br>
+</p>
+
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/d5a202fc-0128-43f1-bc86-cb04d93dc8be>
 </p>
