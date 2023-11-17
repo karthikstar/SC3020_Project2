@@ -100,7 +100,7 @@ NULL Strings: <br>
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/d5a202fc-0128-43f1-bc86-cb04d93dc8be>
 </p>
 
-13. Repeat Steps 11-12 for all 7 other tables in the database.
+13. Repeat Steps 11-12 for all 7 other tables in the database **IN THR ORDER region, nation, customer, supplier, part, partsupp, orders, lineitem**!
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/e0206743-9b9c-497f-a34e-98343acf1abb>
 </p>
