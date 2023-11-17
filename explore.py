@@ -49,18 +49,23 @@ class AnnotatorHelper:
         processingsteps = processingsteps[:-1]
         processingsteps += " \n\nAnd we get our final results!"
         processingsteps += "\n\n Total Buffer Shared Hits: {}".format(sum(buffer_data.values()))
+        processingsteps += "\n Total Number of Block Accesses: {}".format(retrieve_block_access_count(LoginDetails, QueryDetails))
         processingsteps += "\n Planning Time: {}".format(retrieve_other_stats(LoginDetails, QueryDetails)[0])
         processingsteps += "\n Execution Time: {}".format(retrieve_other_stats(LoginDetails, QueryDetails)[1])
         return processingsteps
 
     def extract_natural_language(self, query, first_run, buffer_data):
-        joined_tables_list = []
+        table_count = []
         procedure = ""
 
+        print(buffer_data)
         if "Plans" in query:
             for plan in query["Plans"]:
                 temp = self.extract_natural_language(plan, False, buffer_data)
-                joined_tables_list.append(temp[0])
+                table_count.append(temp[0])
+                if temp[1] == '.':
+                    procedure += str(temp)
+                    continue
                 procedure += temp[1]
 
         self.stepnumber += 1
@@ -76,7 +81,7 @@ class AnnotatorHelper:
             line_description += "\n"
             return table, procedure + line_description
 
-        elif query["Node Type"] == 'Index-Only Scan':
+        elif query["Node Type"] == 'Index Only Scan':
             table = query["Relation Name"]
             name = query["Alias"]
             line_description = "Conduct INDEX SCAN on table '{}' as '{}' using the index on '{}'".format(table, name,
@@ -86,7 +91,7 @@ class AnnotatorHelper:
                 line_description += " for {}".format(query["Index Cond"])
             if "Filter" in query:
                 line_description += " under the condition {}".format(query["Filter"])
-            line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Index-Only Scan'])
+            line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Index Only Scan'])
             line_description += "\n"
             return table, procedure + line_description
 
@@ -142,14 +147,14 @@ class AnnotatorHelper:
                 line_description += " under the condition that {}".format(query["Filter"])
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Subquery Scan'])
             line_description += "\n"
-            return joined_tables_list[0], procedure + line_description
+            return table_count[0], procedure + line_description
 
         elif query["Node Type"] == 'Nested Loop':
             self.tablenumber += 1
-            line_description = "Execute NESTED LOOP JOIN on tables '{}' and '{}'".format(joined_tables_list[0],
-                                                                                         joined_tables_list[1])
+            line_description = "Execute NESTED LOOP JOIN on tables '{}' and '{}'".format(table_count[0],
+                                                                                         table_count[1])
             if "Join Filter" in query:
-                line_description += " on join filter {}".format(joined_tables_list[0], joined_tables_list[1],
+                line_description += " on join filter {}".format(table_count[0], table_count[1],
                                                                 query["Join Filter"])
             if "Filter" in query:
                 line_description += " under the condition that {}".format(query["Filter"])
@@ -169,8 +174,8 @@ class AnnotatorHelper:
 
         elif query["Node Type"] == 'Hash Join':
             self.tablenumber += 1
-            line_description = "Execute a HASH JOIN on tables '{}' and '{}'".format(joined_tables_list[0],
-                                                                                    joined_tables_list[1])
+            line_description = "Execute a HASH JOIN on tables '{}' and '{}'".format(table_count[0],
+                                                                                    table_count[1])
             if "Hash Cond" in query:
                 line_description += " on hash condition {}".format(query["Hash Cond"])
             if "Filter" in query:
@@ -183,8 +188,8 @@ class AnnotatorHelper:
 
         elif query["Node Type"] == 'Merge Join':
             self.tablenumber += 1
-            line_description = "Execute a MERGE JOIN on tables '{}' and '{}'".format(joined_tables_list[0],
-                                                                                     joined_tables_list[1])
+            line_description = "Execute a MERGE JOIN on tables '{}' and '{}'".format(table_count[0],
+                                                                                     table_count[1])
             if "Merge Cond" in query:
                 line_description += " on merge condition {}".format(query["Merge Cond"])
             if "Filter" in query:
@@ -198,7 +203,7 @@ class AnnotatorHelper:
 
         elif query["Node Type"] == 'Aggregate':
             self.tablenumber += 1
-            line_description = "Execute AGGREGATE on table '{}'".format(joined_tables_list[0])
+            line_description = "Execute AGGREGATE on table '{}'".format(table_count[0])
             if not first_run:
                 line_description += " to get intermediate table T{}".format(self.tablenumber)
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Aggregate'])
@@ -207,7 +212,7 @@ class AnnotatorHelper:
 
         elif query["Node Type"] == 'Gather':
             self.tablenumber += 1
-            line_description = ("Execute GATHER on table '{}'".format(joined_tables_list[0]))
+            line_description = ("Execute GATHER on table '{}'".format(table_count[0]))
             if not first_run:
                 line_description += " to get intermediate table T{}".format(self.tablenumber)
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Gather'])
@@ -216,8 +221,8 @@ class AnnotatorHelper:
 
         elif query["Node Type"] == 'Append':
             self.tablenumber += 1
-            line_description = "APPEND the results from table '{}' to table '{}'".format(joined_tables_list[0],
-                                                                                         joined_tables_list[1])
+            line_description = "APPEND the results from table '{}' to table '{}'".format(table_count[0],
+                                                                                         table_count[1])
             if not first_run:
                 line_description += " to get intermediate table T{}".format(self.tablenumber)
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Append'])
@@ -228,11 +233,11 @@ class AnnotatorHelper:
             line_description = "Results of previous operation are GATHERED & MERGED"
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Gather Merge'])
             line_description += "\n"
-            return joined_tables_list[0], procedure + line_description
+            return table_count[0], procedure + line_description
 
         elif query["Node Type"] == 'GroupAggregate':
             self.tablenumber += 1
-            line_description = "Execute a GROUP AGGREGATE on table '{}'".format(joined_tables_list[0])
+            line_description = "Execute a GROUP AGGREGATE on table '{}'".format(table_count[0])
             if not first_run:
                 line_description += " to get intermediate table T{}".format(self.tablenumber)
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['GroupAggregate'])
@@ -241,7 +246,7 @@ class AnnotatorHelper:
 
         elif query["Node Type"] == 'HashAggregate':
             self.tablenumber += 1
-            line_description = "Execute a HASH AGGREGATE on table '{}'".format(joined_tables_list[0])
+            line_description = "Execute a HASH AGGREGATE on table '{}'".format(table_count[0])
             if not first_run:
                 line_description += " to get intermediate table T{}".format(self.tablenumber)
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['HashAggregate'])
@@ -249,31 +254,31 @@ class AnnotatorHelper:
             return "T" + str(self.tablenumber), procedure + line_description
 
         elif query["Node Type"] == 'Hash':
-            line_description = "Execute HASHING on table '{}'".format(joined_tables_list[0])
+            line_description = "Execute HASHING on table '{}'".format(table_count[0])
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Hash'])
             line_description += "\n"
-            return joined_tables_list[0], procedure + line_description
+            return table_count[0], procedure + line_description
 
         elif query["Node Type"] == 'Incremental Sort':
             line_description = "INCREMENTAL SORT is carried out on table '{}' with sort key {}".format(
-                joined_tables_list[0],
+                table_count[0],
                 query["Sort Key"])
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Incremental Sort'])
             line_description += "\n"
-            return joined_tables_list[0], procedure + line_description
+            return table_count[0], procedure + line_description
 
         elif query["Node Type"] == 'Limit':
             line_description = "The indicated LIMIT on the number of rows is extracted from the table '{}'".format(
-                joined_tables_list[0])
+                table_count[0])
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Limit'])
             line_description += "\n"
-            return joined_tables_list[0], procedure + line_description
+            return table_count[0], procedure + line_description
 
         elif query["Node Type"] == 'Materialize':
-            line_description = "MATERIALIZE table '{}'".format(joined_tables_list[0])
+            line_description = "MATERIALIZE table '{}'".format(table_count[0])
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Materialize'])
             line_description += "\n"
-            return joined_tables_list[0], procedure + line_description
+            return table_count[0], procedure + line_description
 
         elif query["Node Type"] == 'ModifyTable':
             table = query["Relation Name"]
@@ -284,8 +289,8 @@ class AnnotatorHelper:
 
         elif query["Node Type"] == 'MergeAppend':
             self.tablenumber += 1
-            line_description = "Results from table '{}' are APPENDED to table '{}'".format(joined_tables_list[0],
-                                                                                           joined_tables_list[1])
+            line_description = "Results from table '{}' are APPENDED to table '{}'".format(table_count[0],
+                                                                                           table_count[1])
             if not first_run:
                 line_description += " to get intermediate table T{}".format(self.tablenumber)
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['MergeAppend'])
@@ -294,7 +299,7 @@ class AnnotatorHelper:
 
         elif query["Node Type"] == 'SetOp':
             self.tablenumber += 1
-            line_description = "SET OPERATION carried out on table '{}'".format(joined_tables_list[0])
+            line_description = "SET OPERATION carried out on table '{}'".format(table_count[0])
             if not first_run:
                 line_description += " to get intermediate table T{}".format(self.tablenumber)
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['SetOp'])
@@ -302,13 +307,13 @@ class AnnotatorHelper:
             return "T" + str(self.tablenumber), procedure + line_description
 
         elif query["Node Type"] == 'Sort':
-            line_description = "Table '{}' is SORTED on sort key {}".format(joined_tables_list[0], query["Sort Key"])
+            line_description = "Table '{}' is SORTED on sort key {}".format(table_count[0], query["Sort Key"])
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Sort'])
             line_description += "\n"
-            return joined_tables_list[0], procedure + line_description
+            return table_count[0], procedure + line_description
 
         elif query["Node Type"] == 'Unique':
-            table = query["Subplan Name"] if "Subplan Name" in query else joined_tables_list[0]
+            table = query["Subplan Name"] if "Subplan Name" in query else table_count[0]
             line_description = "DUPLICATE ELIMINATION is carried out on table '{}'".format(table)
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Unique'])
             line_description += "\n"
@@ -316,9 +321,9 @@ class AnnotatorHelper:
 
         else:
             line_description = "EXECUTE {}. \n".format(query["Node Type"])
-            if len(joined_tables_list) == 0:
+            if len(table_count) == 0:
                 return procedure + line_description
-            return joined_tables_list[0], procedure + line_description
+            return table_count[0], procedure + line_description
 
 
 def get_database_names(login_details: LoginDetails) -> List[str]:
@@ -566,7 +571,7 @@ def retrieve_buffer_access_data(login_details: LoginDetails, querydetails: Query
             #     print(f"{operator_name}: Shared Hit Blocks = {shared_hits}")
             return shared_hits_per_operator
         except Exception as e:
-            print(f"An error occurred: {e}")
+            pass
 
 
 def get_table_names_from_query(query):
@@ -610,7 +615,7 @@ def retrieve_block_access_count(login_details: LoginDetails, querydetails: Query
             return block_count
 
         except Exception as e:
-            print(f"An error occurred: {e}")
+            pass
 
 
 def retrieve_content_for_block_no(login_details: LoginDetails, querydetails: QueryDetails, block):
@@ -632,7 +637,7 @@ def retrieve_content_for_block_no(login_details: LoginDetails, querydetails: Que
             return data
 
         except Exception as e:
-            print(f"An error occurred: {e}")
+            pass
 
 
 def retrieve_other_stats(login_details: LoginDetails, querydetails: QueryDetails):
@@ -662,4 +667,4 @@ def retrieve_other_stats(login_details: LoginDetails, querydetails: QueryDetails
 
             return output
         except Exception as e:
-            print(f"An error occurred: {e}")
+            pass
