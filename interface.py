@@ -478,7 +478,6 @@ class MainUI(object):
         self.blockContentList.setColumnWidth(0,2000)
         self.blockContentList.headerItem().setText(0, "Content in Accessed Blocks")
 
-
         #Checkbox Implenentation
 
         # Bitmap Scan
@@ -583,7 +582,7 @@ class MainUI(object):
         MainUi.setWindowTitle(_translate("MainUi", "SC3020 Grp 17 Project 2"))
         self.executeButton.setText(_translate("MainUi", "Execute Query"))
 
-        self.selNextBtn.setText(_translate("MainUi", "Retrieve Next 5 Blocks Accessed"))
+        self.selNextBtn.setText(_translate("MainUi", "Visualize Next 5 Blocks Accessed"))
 
         self.selectDBLabel.setText(_translate("MainUi", "Select database"))
         self.headerLabel.setText(_translate("MainUi", "SQL Query Explorer - By Grp 17"))
@@ -707,6 +706,15 @@ class MainUI(object):
 
             self.blockContentList.addTopLevelItem(block)
 
+        if(newBlocksAccessCtr == len(self.accessed_blocks)):
+            self.selNextBtn.setDisabled(True)
+            self.selNextBtn.setStyleSheet("background-color: \"#949398\";\n"
+                                          "color: #ffffff;\n"
+                                          "border-style: outset;\n"
+                                          "border-radius: 2px;\n"
+                                          "font: 14px")
+            self.selNextBtn.setText("All Accessed Blocks have been visualized")
+
     def show_accessed_blocks(self, accesed_blocks):
         from project import Main
         for blockNo in accesed_blocks:
@@ -737,6 +745,15 @@ class MainUI(object):
         self.blockAccessList.clear()
         self.blockContentList.clear()
         self.planList.clear()
+
+        #Reset Button Info
+        self.selNextBtn.setDisabled(False)
+        self.selNextBtn.setStyleSheet("background-color: \"#004146\";\n"
+                                         "color: #ffffff;\n"
+                                         "border-style: outset;\n"
+                                         "border-radius: 2px;\n"
+                                         "font: 14px")
+        self.selNextBtn.setText("Visualize Next 5 Blocks Accessed")
 
         from project import Main
         annotation, qep_cost = Main.get_qep_from_query(self, self.dbButton.currentText(),
