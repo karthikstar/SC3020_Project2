@@ -74,7 +74,7 @@ class Login(object):
 
         #Label for Username
         self.userLabel = QtWidgets.QLabel(login)
-        self.userLabel.setGeometry(QtCore.QRect(40, 90, 31, 16))
+        self.userLabel.setGeometry(QtCore.QRect(40, 90, 70, 16))
         font = QtGui.QFont()
         font.setPointSize(-1)
         font.setBold(False)
@@ -100,7 +100,7 @@ class Login(object):
 
         #Label For Port
         self.portLabel = QtWidgets.QLabel(login)
-        self.portLabel.setGeometry(QtCore.QRect(300, 20, 31, 20))
+        self.portLabel.setGeometry(QtCore.QRect(300, 20, 45, 20))
         font = QtGui.QFont()
         font.setPointSize(-1)
         font.setBold(False)
@@ -148,7 +148,7 @@ class Login(object):
         login.setWindowTitle(_translate("login", "PostgreSQL Login"))
         self.loginButton.setText(_translate("login", "Login"))
         self.hostLabel.setText(_translate("login", "Host"))
-        self.portLabel.setText(_translate("login", "Port"))
+        self.portLabel.setText(_translate("login", "Port No"))
         self.userLabel.setText(_translate("login", "Username"))
         self.passLabel.setText(_translate("login", "Password"))
 
@@ -806,6 +806,8 @@ class MainUI(object):
         self.accessed_blocks = accessed_blocks
 
         self.retrieve_next_blocks()
+
+        self.blockStatsWindow.setText("Total No. Of Blocks Accessed For Query: " + str(len(accessed_blocks)))
 
         import explore
         perm_list = explore.generate_combinations(self)
