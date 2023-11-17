@@ -49,7 +49,8 @@ class AnnotatorHelper:
         processingsteps = processingsteps[:-1]
         processingsteps += " \n\nAnd we get our final results!"
         processingsteps += "\n\n Total Buffer Shared Hits: {}".format(sum(buffer_data.values()))
-        processingsteps += "\n Total Number of Block Accesses: {}".format(retrieve_block_access_count(LoginDetails, QueryDetails))
+        processingsteps += "\n Total Number of Block Accesses: {}".format(
+            retrieve_total_block_access_count(LoginDetails, QueryDetails))
         processingsteps += "\n Planning Time: {}".format(retrieve_other_stats(LoginDetails, QueryDetails)[0])
         processingsteps += "\n Execution Time: {}".format(retrieve_other_stats(LoginDetails, QueryDetails)[1])
         return processingsteps
@@ -58,7 +59,7 @@ class AnnotatorHelper:
         table_count = []
         procedure = ""
 
-        print(buffer_data)
+        #print(buffer_data)
         if "Plans" in query:
             for plan in query["Plans"]:
                 temp = self.extract_natural_language(plan, False, buffer_data)
@@ -113,8 +114,8 @@ class AnnotatorHelper:
             table = query["Relation Name"]
             name = query["Alias"]
             line_description = "Conduct FOREIGN SCAN on table '{}' from schema '{}' as '{}'".format(table,
-                                                                                                        query["Schema"],
-                                                                                                        name)
+                                                                                                    query["Schema"],
+                                                                                                    name)
             line_description += ". ------ Buffer Shared Hits = {}".format(buffer_data['Foreign Scan'])
             line_description += "\n"
             return table, procedure + line_description
@@ -616,6 +617,11 @@ def retrieve_block_access_count(login_details: LoginDetails, querydetails: Query
 
         except Exception as e:
             pass
+
+
+def retrieve_total_block_access_count(login_details: LoginDetails, querydetails: QueryDetails):
+    block_data = retrieve_block_access_count(login_details, querydetails)
+    return sum(block_data.values())
 
 
 def retrieve_content_for_block_no(login_details: LoginDetails, querydetails: QueryDetails, block):
