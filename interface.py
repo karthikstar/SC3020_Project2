@@ -275,25 +275,10 @@ class MainUI(object):
                                         "font: 14px")
         self.executeButton.setObjectName("executeButton")
 
-        #Button to Select Prev 5 Blocks
-        self.selPrevBtn = QtWidgets.QPushButton(MainUi)
-        self.selPrevBtn.setGeometry(QtCore.QRect(640, 750, 200, 30))
-        font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.selPrevBtn.setFont(font)
-        self.selPrevBtn.setStyleSheet("background-color: \"#004146\";\n"
-                                         "color: #ffffff;\n"
-                                         "border-style: outset;\n"
-                                         "border-radius: 2px;\n"
-                                         "font: 14px")
-        self.selPrevBtn.setObjectName("selPrevBtn")
 
-        #Button to Select
+        #Button to Select Next 5 blocks
         self.selNextBtn = QtWidgets.QPushButton(MainUi)
-        self.selNextBtn.setGeometry(QtCore.QRect(850, 750, 200, 30))
+        self.selNextBtn.setGeometry(QtCore.QRect(650, 750, 400, 30))
         font = QtGui.QFont()
         font.setPointSize(-1)
         font.setBold(False)
@@ -577,7 +562,6 @@ class MainUI(object):
         self.selectParamsLabel.raise_()
 
         self.executeButton.raise_()
-        self.selPrevBtn.raise_()
         self.selNextBtn.raise_()
 
         self.dbButton.raise_()
@@ -599,8 +583,7 @@ class MainUI(object):
         MainUi.setWindowTitle(_translate("MainUi", "SC3020 Grp 17 Project 2"))
         self.executeButton.setText(_translate("MainUi", "Execute Query"))
 
-        self.selPrevBtn.setText(_translate("MainUi", "Prev 5 Blocks"))
-        self.selNextBtn.setText(_translate("MainUi", "Next 5 Blocks"))
+        self.selNextBtn.setText(_translate("MainUi", "Retrieve Next 5 Blocks Accessed"))
 
         self.selectDBLabel.setText(_translate("MainUi", "Select database"))
         self.headerLabel.setText(_translate("MainUi", "SQL Query Explorer - By Grp 17"))
@@ -648,7 +631,6 @@ class MainUI(object):
 
         self.executeButton.clicked.connect(self.show_annotations)
 
-        self.selPrevBtn.clicked.connect(self.retrieve_prev_blocks)
         self.selNextBtn.clicked.connect(self.retrieve_next_blocks)
 
     def doCheck(self):
@@ -695,39 +677,6 @@ class MainUI(object):
 
     def add_to_text(self, item: QTreeWidgetItem, col: int):
         self.queryInput.appendPlainText(f'{item.text(col)}, ')
-
-    def retrieve_prev_blocks(self):
-        oldBlocksAccessCtr = self.blocksAccessCtr
-        newBlocksAccessCtr = oldBlocksAccessCtr - 5
-        remainder = newBlocksAccessCtr % 5
-        if(remainder != 0):
-            newBlocksAccessCtr -= remainder
-
-        if(newBlocksAccessCtr < 0):
-            newBlocksAccessCtr = 0
-
-        self.blocksAccessCtr = newBlocksAccessCtr
-
-        from project import Main
-        for i in range(newBlocksAccessCtr, newBlocksAccessCtr + 5):
-            blockContentTemp = Main.get_content_in_specified_block(self, self.dbButton.currentText(),
-                                                                         self.queryInput.toPlainText(),
-                                                                        self.accessed_blocks[i])
-            block = QTreeWidgetItem(["Block " + str(self.accessed_blocks[i])])
-            for tableNo in blockContentTemp:
-                msg = ""
-                if len(blockContentTemp[tableNo]) == 0:
-                    msg = " -- No Records"
-                else:
-                    msg = " -- " + str(len(blockContentTemp[tableNo])) + " Records"
-                table = QTreeWidgetItem(["Table " + str(tableNo) + msg])
-                block.addChild(table)
-                for tuple in blockContentTemp[tableNo]:
-                    tuple = QTreeWidgetItem([str(tuple)])
-                    table.addChild(tuple)
-
-            self.blockContentList.addTopLevelItem(block)
-
 
     def retrieve_next_blocks(self):
         oldBlocksAccessCtr = self.blocksAccessCtr
@@ -783,7 +732,7 @@ class MainUI(object):
         #Reset
         self.blocksAccessCtr = 0
 
-        #Clear Windows
+        # #Clear Windows
         self.graphWindow.clear()
         self.blockAccessList.clear()
         self.blockContentList.clear()
@@ -811,39 +760,8 @@ class MainUI(object):
             # col.addChild(swag)
             self.blockAccessList.addTopLevelItem(tbl)
 
-        # blockContent = {}
-        # for block_no in accesed_blocks:
-        #     blockContent[block_no] = Main.get_content_in_specified_block(self, self.dbButton.currentText(),
-        #                                                                  self.queryInput.toPlainText(), block_no)
-        # block_no = 20000
-        # blockContent[block_no] = Main.get_content_in_specified_block(self, self.dbButton.currentText(),
-        #                                                                  self.queryInput.toPlainText(), block_no)
-
         self.accessed_blocks = accesed_blocks
         self.retrieve_next_blocks()
-        # self.show_accessed_blocks(accesed_blocks)
-        # for blockNo in accesed_blocks:
-        #     blockContentTemp = Main.get_content_in_specified_block(self, self.dbButton.currentText(),
-        #                                                                  self.queryInput.toPlainText(), blockNo)
-        #     block = QTreeWidgetItem(["Block " + str(blockNo)])
-        #     for tableNo in blockContentTemp:
-        #         msg = ""
-        #         if len(blockContentTemp[tableNo]) == 0:
-        #             msg = " -- No Records"
-        #         else:
-        #             msg = " -- " + str(len(blockContentTemp[tableNo])) + " Records"
-        #         table = QTreeWidgetItem(["Table " + str(tableNo) + msg])
-        #         block.addChild(table)
-        #         for tuple in blockContentTemp[tableNo]:
-        #             tuple = QTreeWidgetItem([str(tuple)])
-        #             table.addChild(tuple)
-        #
-        #     self.blockContentList.addTopLevelItem(block)
-
-
-
-
-
 
         import explore
         perm_list = explore.generate_combinations(self)
@@ -857,8 +775,6 @@ class MainUI(object):
         from project import Main
         alt_plans = Main.get_aqp(self, perm_list, self.dbButton.currentText(),
                                  self.queryInput.toPlainText())
-        # print('perm', perm_list)
-        # print('alt', alt_plans)
 
         configs = ["QEP"]
         for i in range(0, len(alt_plans)):
@@ -909,15 +825,6 @@ class MainUI(object):
                 tbl.addChild(col)
             self.planList.addTopLevelItem(tbl)
 
-        # block_access_data = Main.get_block_access_data(self, self.dbButton.currentText(),
-        #                     self.queryInput.toPlainText())
-        #
-        # # print(block_access_data)
-        # for key in block_access_data:
-        #     tbl = QTreeWidgetItem(["Block " + str(key)])
-        #     col = QTreeWidgetItem(["No. Of Accesses: " + str(block_access_data[key])])
-        #     tbl.addChild(col)
-        #     self.blockAccessList.addTopLevelItem(tbl)
 
 
 
