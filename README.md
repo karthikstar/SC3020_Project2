@@ -3,7 +3,7 @@
 
 ## Prerequisites
 ### Software
-1. PostgreSQL [Download](https://www.postgresql.org/download/)
+1. PostgreSQL [Download](https://www.postgresql.org/download/) (**Remember to note down the password & port number inputted during installation**)
 2. pgAdmin4 [Download](https://www.pgadmin.org/download/) (for uploading databases into PostgreSQL)
 3. Python IDE [PyCharm Community Edition](https://www.jetbrains.com/pycharm/download/?section=windows) (Optional - if running project from terminal)
 4. Python Installment [Download](https://www.python.org/downloads/) (compatible up to 3.11)
