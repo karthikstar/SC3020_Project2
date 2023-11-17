@@ -1,6 +1,6 @@
 ## SC3020 Group 17 - SQL Query Explainer
 <p align="center">
-  <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/c972a4e1-ccec-4019-9cd0-ea979ef429b1>
+  <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/260c050e-8b43-4f75-add2-688966725b7e>
 </p>
 
 
