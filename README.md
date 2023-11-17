@@ -1,4 +1,4 @@
-![image](https://github.com/karthikstar/SC3020_Project2/assets/22176064/656dccc2-31d4-423a-bec6-4c7abfae6b6c)## SC3020 Group 17 - SQL Query Explainer
+## SC3020 Group 17 - SQL Query Explainer
 <p align="center">
   <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/260c050e-8b43-4f75-add2-688966725b7e>
 </p>
@@ -43,6 +43,12 @@
 </p>
 8. Now, you should see your created database name in the left menu. Right click on it & access the 'Query Tool' option.
 <p align="center">
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+</p>
+9. Access the code stored in the file schema.sql under our project directory's database folder. Copy this code into the Query Tool and hit the run button.
+<p align="center">
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 </p>
