@@ -166,8 +166,9 @@ pyqtgraph==0.13.1
 
 5.	Select Virtualenv Environment, location is current directory \venv and base interpreter is your latest Python Interpreter found in your system (avoid Python 3.12).
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/4310fcb1-c2d6-45de-8272-eb419563ee26>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/81dc419e-84c3-489f-b16e-d9872fa2b281>
 </p>
+
 
 
 6.	Select 'OK' and 'venv' folder should be created
