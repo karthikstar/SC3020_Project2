@@ -82,7 +82,7 @@
 </p>
 
 <p align="center">
-__Filename:__ Select the correct respective .csv database file for your selected table, then click 'Ok'.  <br>   
+**Filename:** Select the correct respective .csv database file for your selected table, then click 'Ok'.  <br>   
 Format: CSV
 </p>
 
