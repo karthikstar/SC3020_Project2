@@ -1,4 +1,4 @@
-## SC3020 Group 17 - SQL Query Explainer
+![Screenshot_17](https://github.com/karthikstar/SC3020_Project2/assets/22176064/e2fafe29-292a-4e95-b1a8-319dce015044)## SC3020 Group 17 - SQL Query Explainer
 
 
 ## Prerequisites
@@ -63,26 +63,31 @@
 
 9. Access the code stored in the file schema.sql under our project directory's database folder. Copy this code into the Query Tool and hit the run/F5 button.
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/9c8e11ae-298d-4820-8b9c-3650b0dfd565>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/7472ccdf-1436-4078-bc2a-dcdc4f2ccd60>
 </p>
+
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/5f90d9cb-25b9-4e46-a294-d936464414e4>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/1a9813ba-0ba1-46f4-a3c9-5de24c43b1a9>
 </p>
+
 
 10. Now, the respective tables should be created under the created 'TPC-H' database in the left menu.
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/87fa1e7d-0a19-4a72-8397-9cde53bdfda5>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/9c281437-27e6-459b-bdb4-70864010ad0d>
 </p>
+
 
 11. Right-click any of the table names & access the 'Import/Export Data..' menu.
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/56932759-bd04-4f70-88d7-183a49863ae9>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/e0737379-fc82-4d66-955c-9e30513b57d5>
 </p>
+
 
 12. Enter the entries in the menu with the following configurations.
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/c9355613-d375-4123-928e-814d81888637>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/6cf2ae38-08d0-4e2c-9f59-ac6c53562b67>
 </p>
+
 
 <p align="center">
 Filename: Select the correct respective .csv database file for your selected table, then click 'Ok'.  <br>   
@@ -90,8 +95,9 @@ Format: CSV
 </p>
 
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/bfc510b7-526c-4dc0-a1c7-c595accfb0a9>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/a43c5110-e2d9-4af1-bee9-f9d724329f7d>
 </p>
+
 
 <p align="center">
 OID: Off <br>
@@ -103,13 +109,15 @@ NULL Strings: <br>
 </p>
 
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/d5a202fc-0128-43f1-bc86-cb04d93dc8be>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/636565ef-4375-42c9-9104-0470003c27da>
 </p>
+
 
 13. Repeat Steps 11-12 for all 7 other tables in the database **IN THR ORDER region, nation, customer, supplier, part, partsupp, orders, lineitem**!
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/e0206743-9b9c-497f-a34e-98343acf1abb>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/f6ec9932-c306-416a-8247-10bc914d3b98>
 </p>
+
 
 14. Congrats! Now all 8 databases should be loaded into your PostgreSQL database. Our project is now ready to be ran!
 
