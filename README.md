@@ -1,7 +1,4 @@
 ## SC3020 Group 17 - SQL Query Explainer
-<p align="center">
-  <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/260c050e-8b43-4f75-add2-688966725b7e>
-</p>
 
 
 ## Prerequisites
@@ -82,7 +79,7 @@
 </p>
 
 <p align="center">
-**Filename:** Select the correct respective .csv database file for your selected table, then click 'Ok'.  <br>   
+Filename: Select the correct respective .csv database file for your selected table, then click 'Ok'.  <br>   
 Format: CSV
 </p>
 
@@ -160,6 +157,7 @@ pyqtgraph==0.13.1
 
 5.	Select Virtualenv Environment, location is current directory \venv and base interpreter is your latest Python Interpreter found in your system (avoid Python 3.12).
 <p align="center">
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/4310fcb1-c2d6-45de-8272-eb419563ee26>
 </p>
 
 
@@ -199,4 +197,14 @@ pyqtgraph==0.13.1
 12.	Run the Project from our 'project.py' file.
 <p align="center">
 <img src = https://user-images.githubusercontent.com/49341007/202510687-2fef0618-6001-472b-933b-8ff4ed9c1b27.png>
+</p>
+
+13. Login to the app using the login details you created during your installation of PostgreSQL.
+<p align="center">
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/250db4e8-579a-488a-88c9-43e5b03c0e55>
+</p>
+
+14. You should now be on the main page of our application. Ready to run your own queries?
+<p align="center">
+  <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/260c050e-8b43-4f75-add2-688966725b7e>
 </p>
