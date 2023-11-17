@@ -23,20 +23,21 @@
 
 4. Open up pgAdmin4.
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/bc16af0f-0469-4b89-89b9-43326fe3d175>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/159fc926-e493-4622-93e5-268e85c2866d>
 </p>
 
 5. Access your PostgreSQL through the left menu & expand the menu to see the 'Databases' Icon.
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/d4b1e541-0914-4dbe-851d-adaec5f8a6a8>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/3a847a1d-8b01-42ce-83fc-338f104fee07>
 </p>
+
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/99d6b18a-727a-49a4-a6c8-c5fc0d4b55f0>
 </p>
 
 6. Right-click 'Databases' to show the menu and access the database creation menu. 
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8eb2d16c-64ed-4dce-8e39-0317199fe5fa>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/5db4d601-55fe-48d6-9741-5ac9b4c72f0c>
 </p>
 
 7. Enter 'TPC-H' as the database name (or any names you like) & click 'Save'.
