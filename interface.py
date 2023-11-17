@@ -363,7 +363,7 @@ class MainUI(object):
 
         #Input Query Label
         self.inputQueryLabel = QtWidgets.QLabel(MainUi)
-        self.inputQueryLabel.setGeometry(QtCore.QRet(180, 30, 111, 16))
+        self.inputQueryLabel.setGeometry(QtCore.QRect(180, 30, 111, 16))
         font = QtGui.QFont()
         font.setPointSize(-1)
         font.setItalic(False)
