@@ -49,7 +49,7 @@ class AnnotatorHelper:
         processingsteps = processingsteps[:-1]
         processingsteps += " \n\nAnd we get our final results!"
         processingsteps += "\n\n Total Buffer Shared Hits: {}".format(sum(buffer_data.values()))
-        processingsteps += "\n Total Number of Block Accesses: {}".format(
+        processingsteps += "\n Output Data Size: {} rows".format(
             retrieve_total_block_access_count(LoginDetails, QueryDetails))
         processingsteps += "\n Planning Time: {}".format(retrieve_other_stats(LoginDetails, QueryDetails)[0])
         processingsteps += "\n Execution Time: {}".format(retrieve_other_stats(LoginDetails, QueryDetails)[1])

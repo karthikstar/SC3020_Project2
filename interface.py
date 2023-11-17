@@ -463,7 +463,7 @@ class MainUI(object):
                                             "font: 12px")
         self.planList.setColumnCount(1)
         self.planList.setObjectName("planList")
-        self.planList.headerItem().setText(0, "List of Query Plans")
+        self.planList.headerItem().setText(0, "List of All Possible Query Plans")
 
         #Label for Select Parameters
         self.selectParamsLabel = QtWidgets.QLabel(MainUi)
@@ -485,7 +485,7 @@ class MainUI(object):
                                             "font: 12px")
         self.blockAccessList.setColumnCount(1)
         self.blockAccessList.setObjectName("blockAccessList")
-        self.blockAccessList.headerItem().setText(0, "Accessed Block Statistics")
+        self.blockAccessList.headerItem().setText(0, "No. of Rows of Query Output in Each Block")
 
         # List showing block no.s and their respective content (divided into respective tables)
         self.blockContentList = QtWidgets.QTreeWidget(MainUi)
@@ -609,10 +609,10 @@ class MainUI(object):
         self.optPlanWindow.setText(_translate("MainUi",
                                           "The QEP will be displayed in natural language here once you click \"Run Query\""))
         self.blockStatsWindow.setText(_translate("MainUi",
-                                          "Total No. Of Blocks Accessed For Query:"))
+                                          "Total No. Of Blocks holding Query Output Data:"))
         self.optplanLabel.setText(_translate("MainUi", "Optimal Query Plan Generated"))
         self.graphLabel.setText(
-            _translate("MainUi", "Total Cost Visualisation of Different Plans"))
+            _translate("MainUi", "Total Cost Visualisation of Different Query Plans"))
 
         self.selectParamsLabel.setText(_translate("MainUi", "Select Parameters"))
         self.bitmapChoice.setText(_translate("MainUi", "Bitmap Scan"))
@@ -781,7 +781,7 @@ class MainUI(object):
             for key in block_access_data:
                 accessed_blocks.append(key)
                 tbl = QTreeWidgetItem(["Block " + str(key)])
-                col = QTreeWidgetItem(["No. Of Accesses: " + str(block_access_data[key])])
+                col = QTreeWidgetItem(["No. Of Rows: " + str(block_access_data[key])])
                 tbl.addChild(col)
                 self.blockAccessList.addTopLevelItem(tbl)
         except Exception:
@@ -794,7 +794,7 @@ class MainUI(object):
         self.retrieve_next_blocks()
 
         #Update Block Statistics Window
-        self.blockStatsWindow.setText("Total No. Of Blocks Accessed For Query: " + str(len(accessed_blocks)))
+        self.blockStatsWindow.setText("Total No. Of Blocks holding Query Output Data: " + str(len(accessed_blocks)))
 
         perm_list = explore.generate_combinations(self)
 
