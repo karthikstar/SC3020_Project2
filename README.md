@@ -61,23 +61,21 @@
 
 10. Now, the respective tables should be created under the created 'TPC-H' database in the left menu.
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/56932759-bd04-4f70-88d7-183a49863ae9>
-</p>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/87fa1e7d-0a19-4a72-8397-9cde53bdfda5>
 
-11. Right click any of the table names & access the 'Import/Export Data..' menu.
+11. Right-click any of the table names & access the 'Import/Export Data..' menu.
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/c9355613-d375-4123-928e-814d81888637>
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/bfc510b7-526c-4dc0-a1c7-c595accfb0a9>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/56932759-bd04-4f70-88d7-183a49863ae9>
 </p>
 
 12. Enter the entries in the menu with the following configurations.
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/c9355613-d375-4123-928e-814d81888637>
 </p>
 Filename: Select the correct respective .csv database file for your selected table, then click 'Ok'.
 Format:  csv
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/bfc510b7-526c-4dc0-a1c7-c595accfb0a9>
 </p>
 OID: Off
 Header: Off
@@ -86,12 +84,12 @@ Quote: "
 Escape: '
 NULL Strings:
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/d5a202fc-0128-43f1-bc86-cb04d93dc8be>
 </p>
 
 13. Repeat Steps 11-12 for all 7 other tables in the database.
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/e0206743-9b9c-497f-a34e-98343acf1abb>
 </p>
 
 14. Congrats! Now all 8 databases should be loaded into your PostgreSQL database. Our project is now ready to be ran!
