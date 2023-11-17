@@ -32,12 +32,12 @@
 </p>
 
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/99d6b18a-727a-49a4-a6c8-c5fc0d4b55f0>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/5db4d601-55fe-48d6-9741-5ac9b4c72f0c>
 </p>
 
 6. Right-click 'Databases' to show the menu and access the database creation menu. 
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/5db4d601-55fe-48d6-9741-5ac9b4c72f0c>
+<img src = >
 </p>
 
 7. Enter 'TPC-H' as the database name (or any names you like) & click 'Save'.
