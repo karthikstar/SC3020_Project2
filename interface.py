@@ -5,7 +5,7 @@ import pyqtgraph as pg
 colorGradient = ["#DDF4F6", "#BCF1F5", "#99EDF3", "#77ECF5", "#47E4F0", "#0CD4E3", "#06C0CE", "#04A6B2", "#01818A",
                   "#005E65", "#004146"]
 
-
+#Login class, which is used upon entry into the app.
 class Login(object):
     def __init__(self, login_details):
         self.login_details = login_details
@@ -165,7 +165,7 @@ class Login(object):
         self.login_details.user = self.userInput.text()
         self.login_details.password = self.passwordInput.text()
 
-
+#Error UI class, which is used when user enters invalid login information
 class Error(object):
     def __init__(self, msg):
         self.msg = msg
@@ -240,7 +240,7 @@ class Error(object):
         self.errorLabel.setText(self.msg)
         self.ackButton.clicked.connect(QtCore.QCoreApplication.instance().quit)
 
-# Helper to setup main page UI layout
+# MainUI class Handles setting up of the main UI layout
 class MainUI(object):
 
     def __init__(self, login_details, db_list):
@@ -275,7 +275,7 @@ class MainUI(object):
         self.executeButton.setObjectName("executeButton")
 
 
-        #Button to Select Next 5 blocks
+        #Button to Select Next 5 Accessed Blocks
         self.selNextBtn = QtWidgets.QPushButton(MainUi)
         self.selNextBtn.setGeometry(QtCore.QRect(650, 750, 400, 30))
         font = QtGui.QFont()
@@ -319,7 +319,7 @@ class MainUI(object):
                                    "font: 14px")
         self.headerLabel.setObjectName("headerLabel")
 
-        # Input to put query in
+        # Input Window to put query in
         self.queryInput = QtWidgets.QPlainTextEdit(MainUi)
         self.queryInput.setGeometry(QtCore.QRect(180, 50, 430, 380))
         font = QtGui.QFont()
@@ -333,7 +333,7 @@ class MainUI(object):
                                                "padding: 5px")
         self.queryInput.setObjectName("queryInput")
 
-        # label for #choose database
+        # Label for choose database
         self.selectDBLabel = QtWidgets.QLabel(MainUi)
         self.selectDBLabel.setGeometry(QtCore.QRect(20, 30, 111, 16))
         font = QtGui.QFont()
@@ -346,7 +346,7 @@ class MainUI(object):
                                  "font: 12px")
         self.selectDBLabel.setObjectName("selectDBLabel")
 
-        # schemaWidget - List of Schemas
+        # schemaWidget - Shows List of Schemas
         self.schemaWidget = QtWidgets.QTreeWidget(MainUi)
         self.schemaWidget.setGeometry(QtCore.QRect(1080, 50, 250, 150))
         font = QtGui.QFont()
@@ -366,8 +366,8 @@ class MainUI(object):
         self.inputQueryLabel.setGeometry(QtCore.QRect(180, 30, 111, 16))
         font = QtGui.QFont()
         font.setPointSize(-1)
-        font.setBold(False)
         font.setItalic(False)
+        font.setBold(False)
         font.setWeight(50)
         self.inputQueryLabel.setFont(font)
         self.inputQueryLabel.setStyleSheet("color: \"#6a6b79\";\n"
@@ -379,8 +379,8 @@ class MainUI(object):
         self.optPlanWindow.setGeometry(QtCore.QRect(620, 50, 450, 375))
         font = QtGui.QFont()
         font.setPointSize(-1)
-        font.setBold(False)
         font.setItalic(False)
+        font.setBold(False)
         font.setWeight(50)
         self.optPlanWindow.setFont(font)
         self.optPlanWindow.setStyleSheet("color: \"#ffffff\";\n"
@@ -430,15 +430,15 @@ class MainUI(object):
         self.graphLabel.setGeometry(QtCore.QRect(200, 470, 400, 16))
         font = QtGui.QFont()
         font.setPointSize(-1)
-        font.setBold(False)
         font.setItalic(False)
+        font.setBold(False)
         font.setWeight(50)
         self.graphLabel.setFont(font)
         self.graphLabel.setStyleSheet("color: \"#018076\";\n"
                                    "font: 14px")
         self.graphLabel.setObjectName("graphLabel")
 
-        # Graph Window for visualising total costs for each plan
+        # Graph Window to visualize total costs for each plan
         self.graphWindow = pg.PlotWidget(MainUi)
         self.graphWindow.setGeometry(QtCore.QRect(10, 490, 600, 300))
         self.graphWindow.setStyleSheet("color: \"#eaebf2\";\n"
@@ -451,8 +451,8 @@ class MainUI(object):
 
         font = QtGui.QFont()
         font.setPointSize(-1)
-        font.setBold(False)
         font.setItalic(False)
+        font.setBold(False)
         font.setWeight(50)
         self.graphWindow.setObjectName("graphWindow")
 
@@ -497,8 +497,7 @@ class MainUI(object):
         self.blockContentList.setColumnWidth(0,2000)
         self.blockContentList.headerItem().setText(0, "Content in Accessed Blocks")
 
-        #Checkbox Implenentation
-
+        #Implementation for Checkbox
         # Bitmap Scan
         self.bitmapChoice = QtWidgets.QCheckBox(MainUi)
         self.bitmapChoice.setGeometry(QtCore.QRect(20, 140, 141, 20))
@@ -640,11 +639,13 @@ class MainUI(object):
         self.materializationChoice.setChecked(False)
         self.explicitChoice.setChecked(False)
 
+        #DB handling
         self.dbButton.addItems(self.db_list)
         if "TPC-H" in self.db_list:
             self.dbButton.setCurrentText("TPC-H")
         self.populate_pane()
 
+        #Button connect handling
         self.dbButton.currentIndexChanged.connect(self.populate_pane)
         self.schemaWidget.itemDoubleClicked.connect(self.add_to_text)
         self.queryInput.setPlainText(
@@ -685,13 +686,13 @@ class MainUI(object):
         from explore import get_tables_in_database, get_columns_for_table
         self.schemaWidget.clear()
         tables = get_tables_in_database(self.login_details, self.dbButton.currentText())
-        treeWid = {}
+        treeWidget = {}
         for table in tables:
-            treeWid[table] = get_columns_for_table(self.login_details, self.dbButton.currentText(), table)
+            treeWidget[table] = get_columns_for_table(self.login_details, self.dbButton.currentText(), table)
         #print(treeWid)
-        for table in treeWid:
+        for table in treeWidget:
             tbl = QTreeWidgetItem([table])
-            for column in treeWid[table]:
+            for column in treeWidget[table]:
                 col = QTreeWidgetItem([column])
                 tbl.addChild(col)
             self.schemaWidget.addTopLevelItem(tbl)
@@ -699,6 +700,7 @@ class MainUI(object):
     def add_to_text(self, item: QTreeWidgetItem, col: int):
         self.queryInput.appendPlainText(f'{item.text(col)}, ')
 
+#Helper function to retrieve next 5 blocks and insert into blockContentList
     def retrieve_next_blocks(self):
         oldBlocksAccessCtr = self.blocksAccessCtr
         newBlocksAccessCtr = oldBlocksAccessCtr + 5
@@ -737,29 +739,12 @@ class MainUI(object):
                                           "font: 14px")
             self.selNextBtn.setText("All Accessed Blocks have been visualized")
 
-    def show_accessed_blocks(self, accesed_blocks):
-        from project import Main
-        for blockNo in accesed_blocks:
-            blockContentTemp = Main.get_content_in_specified_block(self, self.dbButton.currentText(),
-                                                                         self.queryInput.toPlainText(), blockNo)
-            block = QTreeWidgetItem(["Block " + str(blockNo)])
-            for tableNo in blockContentTemp:
-                msg = ""
-                if len(blockContentTemp[tableNo]) == 0:
-                    msg = " -- No Records"
-                else:
-                    msg = " -- " + str(len(blockContentTemp[tableNo])) + " Records"
-                table = QTreeWidgetItem(["Table " + str(tableNo) + msg])
-                block.addChild(table)
-                for tuple in blockContentTemp[tableNo]:
-                    tuple = QTreeWidgetItem([str(tuple)])
-                    table.addChild(tuple)
-
-            self.blockContentList.addTopLevelItem(block)
-
 
     def show_annotations(self):
-        #Reset
+        from project import Main
+        import explore
+
+        #Reset Counter
         self.blocksAccessCtr = 0
 
         # #Clear Windows
@@ -777,80 +762,88 @@ class MainUI(object):
                                          "font: 14px")
         self.selNextBtn.setText("Visualize Next 5 Blocks Accessed")
 
-        from project import Main
-        annotation, qep_cost = Main.get_qep_from_query(self, self.dbButton.currentText(),
+
+        #Get QEP from query and update Optimal plan query window
+        annot, qep_cost = Main.get_qep_from_query(self, self.dbButton.currentText(),
                                                       self.queryInput.toPlainText())
-        self.optPlanWindow.setText(annotation)
+        self.optPlanWindow.setText(annot)
 
         self.blockAccessList.clear()
         self.blockContentList.clear()
 
+        #Get Data on Block Accesses
         block_access_data = Main.get_block_access_data(self, self.dbButton.currentText(),
                                                        self.queryInput.toPlainText())
 
-        # print(block_access_data)
 
-        accessed_blocks = [] #keep track of block no.s which are accessed
+        accessed_blocks = [] #Keep track of Block no.s which are accessed
         try:
             for key in block_access_data:
                 accessed_blocks.append(key)
                 tbl = QTreeWidgetItem(["Block " + str(key)])
                 col = QTreeWidgetItem(["No. Of Accesses: " + str(block_access_data[key])])
-                # swag = QTreeWidgetItem(["sadsadsa"])
                 tbl.addChild(col)
-                # col.addChild(swag)
                 self.blockAccessList.addTopLevelItem(tbl)
         except Exception:
             pass
 
+
         self.accessed_blocks = accessed_blocks
 
+        #Retrieve 5 blocks and update in blockContentList UI
         self.retrieve_next_blocks()
 
+        #Update Block Statistics Window
         self.blockStatsWindow.setText("Total No. Of Blocks Accessed For Query: " + str(len(accessed_blocks)))
 
-        import explore
         perm_list = explore.generate_combinations(self)
 
         if qep_cost != -1:
             self.plot_aqps(perm_list, qep_cost)
 
+    #Function to plot alternative Query plans and their costs on graphWindow
     def plot_aqps(self, perm_list, qep_cost):
+        from project import Main
         self.graphWindow.clear()
 
-        from project import Main
-        alt_plans = Main.get_aqp(self, perm_list, self.dbButton.currentText(),
+        #Retrieve alternative query plans
+        altPlans = Main.get_aqp(self, perm_list, self.dbButton.currentText(),
                                  self.queryInput.toPlainText())
 
         configs = ["QEP"]
-        for i in range(0, len(alt_plans)):
+        for i in range(0, len(altPlans)):
             configs.append("AQP " + str(i + 1))
         # print('configs', configs)
 
         costs = [qep_cost]
-        for i in alt_plans:
+        for i in altPlans:
             total_cost = i['Total Cost']
             costs.append(total_cost)
-        # print('costs', costs)
 
-        BINS = len(colorGradient)
-        COST_DIFFERENTIAL = max(costs) - min(costs)
-        if COST_DIFFERENTIAL == 0:
-            COST_DIFFERENTIAL = 1
+
+        #handling color visualisation of graphs
+        bins = len(colorGradient)
+        cost_diff = max(costs) - min(costs)
+        if cost_diff == 0:
+            cost_diff = 1
         colour = []
+
         for cost in costs:
             diff = cost - min(costs)
-            bin = int((diff / COST_DIFFERENTIAL) * (BINS - 1))
+            bin = int((diff / cost_diff) * (bins - 1))
             colour.append(colorGradient[bin])
 
+        #Plot Bar Graphs
         bar_graphs = pg.BarGraphItem(x0=[_ for _ in range(len(configs))], y0=0, width=1, height=costs, brushes=colour)
         self.graphWindow.addItem(bar_graphs)
 
+        #Set Ticks for graph
         ticks = [list(zip([i + 0.5 for i in range(len(configs))], configs))]
         xax = self.graphWindow.getAxis('bottom')
         xax.setTicks(ticks)
 
-        treeWid_aqp = {}
+        #Handle updating of data for query plan list
+        treeWidget_aqp = {}
         for i in range(len(configs)):
             key = str(configs[i]) + str(' : ') + str(costs[i])
             value = []
@@ -859,18 +852,13 @@ class MainUI(object):
             else:
                 for k, v in perm_list[i - 1].items():
                     value.append(str(k) + ' : ' + str(v))
-            treeWid_aqp[key] = value
+            treeWidget_aqp[key] = value
 
         self.planList.clear()
-        # self.blockAccessList.clear()
 
-        for table in treeWid_aqp:
+        for table in treeWidget_aqp:
             tbl = QTreeWidgetItem([table])
-            for column in treeWid_aqp[table]:
+            for column in treeWidget_aqp[table]:
                 col = QTreeWidgetItem([column])
                 tbl.addChild(col)
             self.planList.addTopLevelItem(tbl)
-
-
-
-
