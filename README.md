@@ -18,6 +18,7 @@
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/6e1a2186-a7fa-419f-bf40-11e5bb3cb7f6>
 </p>
+
 3. Unzip the downloaded .zip file & ensure that you have the 8 .csv databases below. 
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/eb7c0b65-ccd2-42be-9767-207bf027997d>
@@ -25,42 +26,53 @@
 
 4. Open up pgAdmin4.
 <p align="center">
-<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
+<img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/bc16af0f-0469-4b89-89b9-43326fe3d175>
 </p>
+
+
+
+
 5. Access your PostgreSQL through the left menu & expand the menu to see the 'Databases' Icon.
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 </p>
+
 6. Right click 'Databases' to show the menu and access the database creation menu. 
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 </p>
+
 7. Enter 'TPC-H' as the database name (or any names you like) & click 'Save'.
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 </p>
+
 8. Now, you should see your created database name in the left menu. Right click on it & access the 'Query Tool' option.
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 </p>
+
 9. Access the code stored in the file schema.sql under our project directory's database folder. Copy this code into the Query Tool and hit the run/F5 button.
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 </p>
+
 10. Now, the respective tables should be created under the created 'TPC-H' database in the left menu.
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 </p>
+
 11. Right click any of the table names & access the 'Import/Export Data..' menu.
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 </p>
+
 12. Enter the entries in the menu with the following configurations.
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
@@ -79,10 +91,12 @@ NULL Strings:
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 </p>
+
 13. Repeat Steps 11-12 for all 7 other tables in the database.
 <p align="center">
 <img src = https://github.com/karthikstar/SC3020_Project2/assets/22176064/8c4f8f18-e571-4ea7-b08d-ef69eb39fd84>
 </p>
+
 14. Congrats! Now all 8 databases should be loaded into your PostgreSQL database. Our project is now ready to be ran!
 
 
